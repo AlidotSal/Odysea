@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 20;
+  }
+}
