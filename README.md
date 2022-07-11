@@ -27,7 +27,7 @@ A lightweight and minimal Solid component for building interactive graphs and no
 The easiest way to get the latest version of Solid Graph is to install it via npm:
 
 ```bash
-npm install solid-graph # or yarn install
+npm install solid-graph # or yarn add
 ```
 
 ## Quick Start
