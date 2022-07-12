@@ -18,7 +18,7 @@ export interface EdgeI {
   source: number;
   target: number;
   label?: string;
-  type?: string;
+  type?: "straight" | "smoothStep" | "step";
   animated?: boolean;
   noHandle?: boolean;
   arrow?: boolean;
@@ -32,7 +32,6 @@ export interface StoreProps {
   edges: EdgeI[];
   width: number;
   height: number;
-  background: boolean;
   children: JSX.Element;
 }
 
@@ -41,7 +40,6 @@ export interface GraphProps {
   edges: EdgeI[];
   width: number;
   height: number;
-  background: boolean;
 }
 
 export interface EdgeProps extends EdgeI {

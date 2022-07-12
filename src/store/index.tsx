@@ -21,7 +21,6 @@ export const StoreProvider = (props: StoreProps) => {
   const [store, setStore] = createStore<StoreI>({ nodes, edges: props.edges });
   const [width, setWidth] = createSignal(props.width);
   const [height, setHeight] = createSignal(props.height);
-  const [background, setBackground] = createSignal(props.background);
   const [selected, setSelected] = createSignal<number | null>(null);
   const [scale, setScale] = createSignal(1);
   const [transition, setTransition] = createSignal<[number, number]>([0, 0]);
@@ -40,8 +39,6 @@ export const StoreProvider = (props: StoreProps) => {
     setWidth,
     height,
     setHeight,
-    background,
-    setBackground,
     selected,
     setSelected,
     scale,
@@ -64,8 +61,6 @@ interface UseStore {
   setWidth: Setter<number>;
   height: () => number;
   setHeight: Setter<number>;
-  background: () => boolean;
-  setBackground: Setter<boolean>;
   selected: () => number | null;
   setSelected: Setter<number | null>;
   scale: () => number;

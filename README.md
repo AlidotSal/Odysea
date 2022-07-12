@@ -40,6 +40,43 @@ function Flow(props) {
 }
 ```
 
+## SolidGraph Props
+
+| Name   | Type   | default | Description             |
+| ------ | ------ | ------- | ----------------------- |
+| nodes  | Node[] | []      | array of nodes          |
+| edges  | Edge[] | []      | array of edges          |
+| width  | number | 800     | width of the container  |
+| height | number | 800     | height of the container |
+
+```jsx
+type Node = {
+  id: number,
+  position: { x: number, y: number },
+  data: { label: string, ... },
+  width?: number,
+  height?: number,
+  bgColor?: string,
+  fontSize?: number,
+  borderColor?: string,
+  borderRadius?: number,
+  textColor?: string,
+};
+
+type Edge = {
+  source: number,
+  target: number,
+  label?: string,
+  type?: "straight" | "smoothStep" | "step",
+  animated?: boolean,
+  noHandle?: boolean,
+  arrow?: boolean,
+  style?: JSX.CSSProperties,
+  labelStyle?: JSX.CSSProperties,
+  labelBgStyle?: JSX.CSSProperties,
+};
+```
+
 ## Development
 
 Before you start you need to build the project using `npm run build`. Then install the Solid Graph dependencies via `npm install`.

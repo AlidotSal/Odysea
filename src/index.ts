@@ -1,4 +1,5 @@
 import SolidGraph from "./containers/SolidGraph";
+import "uno.css";
 
 export default SolidGraph;
 
