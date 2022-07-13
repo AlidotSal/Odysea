@@ -45,7 +45,6 @@ export default function EdgeText(props: TextProps) {
     <Show when={props.label}>
       <g transform={transform()}>
         <rect
-          class="EdgeTextBg"
           fill="white"
           fill-opacity={props.bgStyle?.fill ? "0.8" : ".99"}
           y={box().height / 2 - 8}

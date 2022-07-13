@@ -1,4 +1,5 @@
 import { onMount, onCleanup, For, Switch, Match } from "solid-js";
+import { css } from "solid-styled";
 import { useStore } from "../../store";
 import BezierEdge from "../../components/Edges/BezierEdge";
 import SmoothStepEdge from "../../components/Edges/SmoothStepEdge";
@@ -65,23 +66,37 @@ export default function GraphView() {
     containerRef.addEventListener("gestureend", handleGesture);
   });
 
+  css`
+    .container {
+      position: relative;
+      display: grid;
+      font-family: sans;
+      border: 1px solid #999 
+      user-select: none;
+      overflow: hidden;
+      touch-naction: one;
+    }
+    .canvas {
+      position: absolute;
+      width: ${width().toString()}px;
+      height: ${height().toString()}px;
+      background: transparent;
+      transform-origin: 50% 50%;
+      transform: translate(${transition()[0].toString()}px, ${transition()[1].toString()}px) scale(${scale().toString()});
+    }
+    svg {
+      width: ${width().toString()}px;
+      height: ${height().toString()}px;
+    }
+    g {
+      transform-origin: "50% 50%";
+      transform: translate(${transition()[0].toString()}px, ${transition()[1].toString()}px) scale(${scale().toString()});
+    }
+`;
+
   return (
-    <div
-      ref={containerRef}
-      class="relative grid font-sans border border-gray-200 select-none overflow-hidden touch-none"
-    >
-      <div
-        style={`
-        position: absolute;
-        width: ${width()}px;
-        height: ${height()}px;
-        background: transparent;
-        transform-origin: 50% 50%;
-        transform: translate(${transition()[0]}px, ${
-          transition()[1]
-        }px) scale(${scale()});
-          `}
-      >
+    <div ref={containerRef} class="container">
+      <div class="canvas">
         <For each={Object.values(store.nodes)}>
           {(node) => {
             return <Node node={node}>{node.data.label}</Node>;
@@ -89,15 +104,8 @@ export default function GraphView() {
         </For>
       </div>
 
-      <svg class="Edges" style={`width: ${width()}px; height: ${height()}px`}>
-        <g
-          style={{
-            "transform-origin": "50% 50%",
-            transform: `translate(${transition()[0]}px, ${
-              transition()[1]
-            }px) scale(${scale()})`,
-          }}
-        >
+      <svg>
+        <g>
           <For each={store.edges}>
             {(edge) => (
               <>

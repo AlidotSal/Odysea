@@ -1,4 +1,5 @@
 import { Show } from "solid-js";
+import { css } from "solid-styled";
 import EdgeText from "./EdgeText";
 import EdgeAnchor from "./EdgeAnchor";
 import type { EdgeProps } from "../../types";
@@ -9,6 +10,14 @@ interface BaseProps {
 
 export default function BaseEdge(props: BaseProps) {
   const defaultArrow = `0,0 8,3 0,6`;
+
+  css`
+    path {
+      ${props.baseEdgeProps.animated
+        ? "animation: dash 0.5s linear infinite;stroke-dasharray: 10;"
+        : ""}
+    }
+  `;
 
   return (
     <>
@@ -30,7 +39,6 @@ export default function BaseEdge(props: BaseProps) {
       </defs>
 
       <path
-        class={props.baseEdgeProps.animated ? "stroke-dash-10 animated" : ""}
         d={props.baseEdgeProps.path}
         fill="transparent"
         stroke="#999"
