@@ -1,6 +1,6 @@
 {
   "name": "solid-graph",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A fast and lightweight SolidJS component library for building interactive node-based diagrams",
   "main": "src/index.ts",
   "scripts": {
