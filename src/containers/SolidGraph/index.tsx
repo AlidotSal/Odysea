@@ -1,5 +1,4 @@
 import { StyleRegistry } from "solid-styled";
-import { css } from "solid-styled";
 import { StoreProvider } from "../../store";
 import GraphView from "../GraphView";
 import type { NodeI, EdgeI } from "../../types";
@@ -12,19 +11,6 @@ interface Props {
 }
 
 export default (props: Props) => {
-  css`
-    @global {
-      * {
-        box-sizing: border-box;
-      }
-
-      @keyframes dash {
-        from {
-          stroke-dashoffset: 20;
-        }
-      }
-    }
-  `;
 
   return (
     <StyleRegistry>

@@ -67,36 +67,47 @@ export default function GraphView() {
   });
 
   css`
+    @global {
+      * {
+        box-sizing: border-box;
+      }
+
+      @keyframes dash {
+        from {
+          stroke-dashoffset: 20;
+        }
+      }
+    }
     .container {
       position: relative;
       display: grid;
       font-family: sans;
-      border: 1px solid #999 
+      border: 1px solid #999;
       user-select: none;
       overflow: hidden;
-      touch-naction: one;
+      touch-action: none;
     }
-    .canvas {
+    .nodes {
       position: absolute;
-      width: ${width().toString()}px;
-      height: ${height().toString()}px;
+      width: calc(${width().toString()} * 1px);
+      height: calc(${height().toString()} * 1px);
       background: transparent;
       transform-origin: 50% 50%;
-      transform: translate(${transition()[0].toString()}px, ${transition()[1].toString()}px) scale(${scale().toString()});
+      transform: translate(calc(${transition()[0].toString()} * 1px), calc(${transition()[1].toString()} * 1px)) scale(${scale().toString()});
     }
     svg {
-      width: ${width().toString()}px;
-      height: ${height().toString()}px;
+      width: calc(${width().toString()} * 1px);
+      height: calc(${height().toString()} * 1px);
     }
     g {
-      transform-origin: "50% 50%";
-      transform: translate(${transition()[0].toString()}px, ${transition()[1].toString()}px) scale(${scale().toString()});
+      transform-origin: 50% 50%;
+      transform: translate(calc(${transition()[0].toString()} * 1px), calc(${transition()[1].toString()} * 1px)) scale(${scale().toString()});
     }
 `;
 
   return (
     <div ref={containerRef} class="container">
-      <div class="canvas">
+      <div class="nodes">
         <For each={Object.values(store.nodes)}>
           {(node) => {
             return <Node node={node}>{node.data.label}</Node>;
