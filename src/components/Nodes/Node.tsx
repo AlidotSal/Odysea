@@ -27,15 +27,6 @@ export default (props: NodeProps) => {
     width: ${(props.node.width || 140).toString()}px;
     height: ${(props.node.height || 36).toString()}px;
     border-radius: ${(props.node.borderRadius || 3).toString()}px;
-    ${
-      props.node.id === selected()
-        ? `border: 1px solid #335d92; box-shadow: inset 0 0 0 .15px #2c4f7c, 0 0 0 .15px #2c4f7c;`
-        : `border: 1px solid ${
-            props.node.borderColor || "#5a5a5a"
-          }; box-shadow: inset 0 0 0 .15px ${
-            props.node.borderColor || "#5a5a5a"
-          }, 0 0 0 .15px ${props.node.borderColor || "#5a5a5a"};`
-    }
     color: ${props.node.textColor || "black"};
     background-color: ${props.node.bgColor || "white"};
     transform: translate3d(${props.node.position.x.toString()}px, ${props.node.position.y.toString()}px, 0);
