@@ -13,12 +13,12 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
     lib: {
-      formats: ["es", "cjs", "iife"],
       entry: "./src/index.ts",
       fileName: "solid-graph",
-      name: "solidGraph",
+      name: "SolidGraph",
     },
     rollupOptions: {
+      external: ["solidjs"],
       output: {
         format: "esm",
         dir: "./dist",

@@ -1,9 +1,19 @@
 {
   "name": "solid-graph",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A fast and lightweight SolidJS component library for building interactive node-based diagrams",
-  "main": "./dist/solid-graph.cjs.js",
-  "module": "./dist/solid-graph.es.js",
+  "main": "dist/solid-graph.umd.js",
+  "module": "dist/solid-graph.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/solid-graph.es.js",
+      "require": "./dist/solid-graph.umd.js"
+    },
+    "./package.json": "./package.json",
+    "./dist/style.css": "./dist/style.css"
+  },
+  "sideEffects": false,
+  "types": "dist/types.d.ts",
   "files": [
     "dist"
   ],
