@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     solidPlugin({
       babel: {
-        plugins: [[solidStyled, {}]],
+        plugins: [[solidStyled, { prefix: "sg" }]],
       },
     }),
   ],
@@ -18,7 +18,6 @@ export default defineConfig({
       name: "SolidGraph",
     },
     rollupOptions: {
-      external: ["solidjs"],
       output: {
         format: "esm",
         dir: "./dist",
