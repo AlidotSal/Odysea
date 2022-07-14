@@ -11,7 +11,18 @@ export default defineConfig({
     }),
   ],
   build: {
-    target: "esnext",
-    polyfillDynamicImport: false,
+    emptyOutDir: false,
+    lib: {
+      formats: ["es", "cjs", "iife"],
+      entry: "./src/index.ts",
+      fileName: "solid-graph",
+      name: "solidGraph",
+    },
+    rollupOptions: {
+      output: {
+        format: "esm",
+        dir: "./dist",
+      },
+    },
   },
 });

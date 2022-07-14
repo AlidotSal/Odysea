@@ -51,7 +51,7 @@ export default function EdgeText(props: TextProps) {
           rx="2"
           ry="2"
           width={box().width + 8}
-          height={box().height + 2}
+          height={box().height + 3}
           {...props.bgStyle}
         />
         <text

@@ -18,7 +18,7 @@ export interface EdgeI {
   source: number;
   target: number;
   label?: string;
-  type?: "straight" | "smoothStep" | "step";
+  type?: string;
   animated?: boolean;
   noHandle?: boolean;
   arrow?: boolean;

@@ -81,7 +81,8 @@ export default function GraphView() {
     .container {
       position: relative;
       display: grid;
-      font-family: sans;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI, Roboto";
       border: 1px solid #999;
       user-select: none;
       overflow: hidden;
@@ -93,7 +94,11 @@ export default function GraphView() {
       height: calc(${height().toString()} * 1px);
       background: transparent;
       transform-origin: 50% 50%;
-      transform: translate(calc(${transition()[0].toString()} * 1px), calc(${transition()[1].toString()} * 1px)) scale(${scale().toString()});
+      transform: translate(
+          calc(${transition()[0].toString()} * 1px),
+          calc(${transition()[1].toString()} * 1px)
+        )
+        scale(${scale().toString()});
     }
     svg {
       width: calc(${width().toString()} * 1px);
@@ -101,9 +106,13 @@ export default function GraphView() {
     }
     g {
       transform-origin: 50% 50%;
-      transform: translate(calc(${transition()[0].toString()} * 1px), calc(${transition()[1].toString()} * 1px)) scale(${scale().toString()});
+      transform: translate(
+          calc(${transition()[0].toString()} * 1px),
+          calc(${transition()[1].toString()} * 1px)
+        )
+        scale(${scale().toString()});
     }
-`;
+  `;
 
   return (
     <div ref={containerRef} class="container">
