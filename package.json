@@ -1,6 +1,6 @@
 {
   "name": "solid-graph",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "A fast and lightweight SolidJS component library for building interactive node-based diagrams",
   "main": "dist/solid-graph.umd.cjs",
   "module": "dist/solid-graph.js",
