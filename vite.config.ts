@@ -17,8 +17,8 @@ export default defineConfig({
       name: "SolidGraph",
     },
     rollupOptions: {
+      external: ["solidjs"],
       output: {
-        format: "esm",
         dir: "./dist",
       },
     },
