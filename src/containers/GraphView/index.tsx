@@ -81,6 +81,8 @@ export default function GraphView() {
     .container {
       position: relative;
       display: grid;
+      width: calc(${width().toString()} * 1px);
+      height: calc(${height().toString()} * 1px);
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI, Roboto";
       border: 1px solid #999;

@@ -91,7 +91,7 @@ npm start
 
 Solid Graph is heavily based on [react flow](https://github.com/wbkd/react-flow). Without them Solid Graph would not exist. Please consider donating to them.
 
-- [unocss](https://github.com/unocss/unocss) - for styling components
+- [solid-styled](https://github.com/LXSMNSYC/solid-styled) - for styling components
 
 ## License
 

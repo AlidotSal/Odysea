@@ -26,7 +26,13 @@ export default defineConfig({
       name: "SolidGraph",
     },
     rollupOptions: {
-      external: ["solid-js", "solid-js/web", "solid-js/store"],
+      external: [
+        "solid-js",
+        "solid-js/web",
+        "solid-js/store",
+        "solid-styled",
+        "babel-plugin-solid-styled",
+      ],
       output: {
         dir: "./dist",
       },

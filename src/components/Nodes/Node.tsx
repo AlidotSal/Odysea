@@ -24,14 +24,14 @@ export default (props: NodeProps) => {
       font-size: 0.875rem;
       line-height: 1.25rem;
       text-align: center;
-      width: calc(${(props.node.width || 140).toString()} * 1px);
-      height: calc(${(props.node.height || 36).toString()} * 1px);
+      width: calc(${(props.node.width || 160).toString()} * 1px);
+      height: calc(${(props.node.height || 40).toString()} * 1px);
       color: ${props.node.textColor || "black"};
       background-color: ${props.node.bgColor || "white"};
       border-radius: calc(${(props.node.borderRadius || 3).toString()} * 1px);
-      border: 1px solid ${props.node.borderColor || "#222"};
-      box-shadow: inset 0 0 0 0.15px ${props.node.borderColor || "#1a192b"},
-        0 0 0 0.15px ${props.node.borderColor || "#1a192b"};
+      border: 1px solid ${props.node.borderColor || "#4c4c4c"};
+      box-shadow: inset 0 0 0 0.15px ${props.node.borderColor || "#4c4c4c"},
+        0 0 0 0.15px ${props.node.borderColor || "#4c4c4c"};
       transform: translate3d(
         calc(${props.node.position.x.toString()} * 1px),
         calc(${props.node.position.y.toString()} * 1px),
