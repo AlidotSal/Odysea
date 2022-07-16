@@ -15,8 +15,6 @@
 
 > A lightweight and minimal Solid component for building interactive graphs and node-based editors.
 
----
-
 ## Key Features
 
 - **Easy to use:** Just provide the nodes and edges data and it automatically gets converted to an interactive graph with seamless zooming and panning.
