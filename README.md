@@ -1,17 +1,20 @@
-# :thread: Solid Graph
-
 <div align="center">
-
-![GitHub License MIT](https://img.shields.io/github/license/AlidotSal/solid-graph?color=446b9e)
-![top-language](https://img.shields.io/github/languages/top/AlidotSal/solid-graph?color=446b9e)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AlidotSal/solid-graph?color=446b9e)
-![GitHub Repo stars](https://img.shields.io/github/stars/AlidotSal/solid-graph?color=446b9e)
+<img width="180" src="./src/assets/banner.png" alt="Solid Graph banner">
+<br/>
+<a href="https://www.npmjs.com/package/solid-graph">![NPM Version]https://img.shields.io/npm/v/solid-graph?color=c63537)</a>
+<a href="https://www.npmjs.com/package/solid-graph">![GitHub License](https://img.shields.io/github/license/AlidotSal/solid-graph?color=446b9e)</a>
+<a href="https://www.npmjs.com/package/solid-graph">![top-language](https://img.shields.io/github/languages/top/AlidotSal/solid-graph?color=446b9e)</a>
+<a href="https://www.npmjs.com/package/solid-graph">![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AlidotSal/solid-graph?color=446b9e)</a>
+<a href="https://www.npmjs.com/package/solid-graph">![GitHub Repo stars](https://img.shields.io/github/stars/AlidotSal/solid-graph?color=446b9e)</a>
 
 ### Convert Your Ideas To Graphs With Solid Graph!
 
-A lightweight and minimal Solid component for building interactive graphs and node-based editors.
-
+<br/>
 </div>
+
+# Solid Graph
+
+> A lightweight and minimal Solid component for building interactive graphs and node-based editors.
 
 ---
 
