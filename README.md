@@ -81,8 +81,8 @@ type Edge = {
 
 [Live Example On stackblitz](https://stackblitz.com/edit/vitejs-vite-2wlkrn?file=src/App.tsx)
 
-Pan: alt + drag
-Zoom: mouse wheel
+- Pan: alt + drag
+- Zoom: mouse wheel
 
 ## Development
 
