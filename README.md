@@ -1,11 +1,11 @@
 <div align="center">
-<img width="180" src="./src/assets/banner.png" alt="Solid Graph banner">
+<img width="400" src="./src/assets/banner.png" alt="Solid Graph banner">
 <br/>
-<a href="https://www.npmjs.com/package/solid-graph">![NPM Version]https://img.shields.io/npm/v/solid-graph?color=c63537)</a>
-<a href="https://www.npmjs.com/package/solid-graph">![GitHub License](https://img.shields.io/github/license/AlidotSal/solid-graph?color=446b9e)</a>
-<a href="https://www.npmjs.com/package/solid-graph">![top-language](https://img.shields.io/github/languages/top/AlidotSal/solid-graph?color=446b9e)</a>
-<a href="https://www.npmjs.com/package/solid-graph">![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AlidotSal/solid-graph?color=446b9e)</a>
-<a href="https://www.npmjs.com/package/solid-graph">![GitHub Repo stars](https://img.shields.io/github/stars/AlidotSal/solid-graph?color=446b9e)</a>
+<a href="https://npmjs.com/package/solid-graph"><img src="https://img.shields.io/npm/v/solid-graph?color=c63537" alt="npm version"></a>
+<a href="https://github.com/AlidotSal/solid-graph/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AlidotSal/solid-graph?color=446b9e" alt="gitHub license"></a>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/github/languages/top/AlidotSal/solid-graph?color=446b9e" alt="top-language"></a>
+<img src="https://img.shields.io/github/languages/code-size/AlidotSal/solid-graph?color=446b9e" alt="code size">
+<a href="https://github.com/AlidotSal/solid-graph/stargazers"><img src="https://img.shields.io/github/stars/AlidotSal/solid-graph?color=446b9e" alt="repo stars"></a>
 
 ### Convert Your Ideas To Graphs With Solid Graph!
 
