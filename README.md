@@ -77,6 +77,13 @@ type Edge = {
 };
 ```
 
+## Example
+
+[Live Example On stackblitz](https://stackblitz.com/edit/vitejs-vite-2wlkrn?file=src/App.tsx)
+
+Pan: alt + drag
+Zoom: mouse wheel
+
 ## Development
 
 Before you start you need to build the project using `npm run build`. Then install the Solid Graph dependencies via `npm install`.
