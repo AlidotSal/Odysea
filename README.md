@@ -1,5 +1,5 @@
 <div align="center">
-<h1><img width="800" src="./src/assets/banner.png" alt="Solid Graph banner"><h1>
+<h1><img width="800" src="./src/assets/banner.webp" alt="Solid Graph banner"><h1>
 <a href="https://npmjs.com/package/solid-graph"><img src="https://img.shields.io/npm/v/solid-graph?color=c63537" alt="npm version"></a>
 <a href="https://github.com/AlidotSal/solid-graph/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AlidotSal/solid-graph?color=446b9e" alt="gitHub license"></a>
 <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/github/languages/top/AlidotSal/solid-graph?color=446b9e" alt="top-language"></a>
