@@ -1,5 +1,5 @@
 <div align="center">
-<h1><img width="800" src="./src/assets/banner.webp" alt="Solid Graph banner"><h1>
+<h1><img width="800" src="./src/assets/banner.webp" alt="Odysea banner"><h1>
 <a href="https://npmjs.com/package/odysea"><img src="https://img.shields.io/npm/v/odysea?color=c63537" alt="npm version"></a>
 <a href="https://github.com/AlidotSal/odysea/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AlidotSal/Odysea?color=446b9e" alt="gitHub license"></a>
 <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/github/languages/top/AlidotSal/Odysea?color=446b9e" alt="top-language"></a>
@@ -24,7 +24,7 @@
 
 ## Installation
 
-The easiest way to get the latest version of Solid Graph is to install it via npm:
+The easiest way to get the latest version of Odysea is to install it via npm:
 
 ```bash
 npm install odysea # or yarn add
@@ -89,7 +89,7 @@ type Edge = {
 
 ## Development
 
-Before you start you need to build the project using `npm run build`. Then install the Solid Graph dependencies via `npm install`.
+Before you start you need to build the project using `npm run build`. Then install the Odysea dependencies via `npm install`.
 
 If you want to contribute or develop custom features the easiest way is to start the dev server:
 
@@ -99,10 +99,10 @@ npm start
 
 ## Credits
 
-Solid Graph is heavily based on [react flow](https://github.com/wbkd/react-flow). Without them Solid Graph would not exist. Please consider donating to them.
+Odysea is heavily based on [react flow](https://github.com/wbkd/react-flow). Without them Odysea would not exist. Please consider donating to them.
 
 - [solid-styled](https://github.com/LXSMNSYC/solid-styled) - for styling components
 
 ## License
 
-Solid Graph is [MIT licensed](https://github.com/AlidotSal/odysea/blob/main/LICENSE).
+Odysea is [MIT licensed](https://github.com/AlidotSal/odysea/blob/main/LICENSE).
