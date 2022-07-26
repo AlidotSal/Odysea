@@ -1,10 +1,10 @@
 <div align="center">
 <h1><img width="800" src="./src/assets/banner.webp" alt="Solid Graph banner"><h1>
-<a href="https://npmjs.com/package/odysea"><img src="https://img.shields.io/npm/v/odysea?color=c63537" alt="npm version"></a>
-<a href="https://github.com/AlidotSal/odysea/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AlidotSal/odysea?color=446b9e" alt="gitHub license"></a>
-<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/github/languages/top/AlidotSal/odysea?color=446b9e" alt="top-language"></a>
-<img src="https://img.shields.io/github/languages/code-size/AlidotSal/odysea?color=446b9e" alt="code size">
-<a href="https://github.com/AlidotSal/odysea/stargazers"><img src="https://img.shields.io/github/stars/AlidotSal/odysea?color=446b9e" alt="repo stars"></a>
+<a href="https://npmjs.com/package/Odysea"><img src="https://img.shields.io/npm/v/Odysea?color=c63537" alt="npm version"></a>
+<a href="https://github.com/AlidotSal/odysea/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AlidotSal/Odysea?color=446b9e" alt="gitHub license"></a>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/github/languages/top/AlidotSal/Odysea?color=446b9e" alt="top-language"></a>
+<img src="https://img.shields.io/github/languages/code-size/AlidotSal/Odysea?color=446b9e" alt="code size">
+<a href="https://github.com/AlidotSal/Odysea/stargazers"><img src="https://img.shields.io/github/stars/AlidotSal/Odysea?color=446b9e" alt="repo stars"></a>
 
 ### Convert Your Ideas To A Simple And Excitig Journay With Odysea!
 
