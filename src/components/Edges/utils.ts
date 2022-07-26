@@ -4,8 +4,8 @@ export interface GetCenterParams {
   sourceY: number;
   targetX: number;
   targetY: number;
-  sourcePosition?: "top" | "bottom" | "left" | "right";
-  targetPosition?: "top" | "bottom" | "left" | "right";
+  sourcePosition?: Position;
+  targetPosition?: Position;
 }
 
 const LeftOrRight = ["left", "right"];
@@ -40,8 +40,8 @@ export const getCenter = ({
   sourceY,
   targetX,
   targetY,
-  sourcePosition = "bottom",
-  targetPosition = "top",
+  sourcePosition = Position.Bottom,
+  targetPosition = Position.Top,
 }: GetCenterParams): [number, number, number, number] => {
   const sourceIsLeftOrRight = LeftOrRight.includes(sourcePosition);
   const targetIsLeftOrRight = LeftOrRight.includes(targetPosition);

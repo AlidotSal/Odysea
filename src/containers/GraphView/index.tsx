@@ -1,5 +1,6 @@
 import { onMount, onCleanup, For, Switch, Match } from "solid-js";
 import { css } from "solid-styled";
+import { throttleRAF } from "../../utils";
 import { useStore } from "../../store";
 import BezierEdge from "../../components/Edges/BezierEdge";
 import SmoothStepEdge from "../../components/Edges/SmoothStepEdge";
@@ -25,22 +26,24 @@ export default function GraphView() {
 
   const handlePointerDown = () => setSelected(null);
   const handlePointerMove = (e: PointerEvent) => {
-    if (e.buttons === 0) return;
+    throttleRAF(() => {
+      if (e.buttons === 0) return;
 
-    if (e.pointerType === "mouse") {
-      if (selected()) {
-        updatePosition(e.movementX, e.movementY, selected()!);
-      }
-      if (!selected() && e.altKey) {
-        setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
-      }
-    } else {
-      if (selected()) {
-        updatePosition(e.movementX, e.movementY, selected()!);
+      if (e.pointerType === "mouse") {
+        if (selected()) {
+          updatePosition(e.movementX, e.movementY, selected()!);
+        }
+        if (!selected() && e.altKey) {
+          setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
+        }
       } else {
-        setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
+        if (selected()) {
+          updatePosition(e.movementX, e.movementY, selected()!);
+        } else {
+          setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
+        }
       }
-    }
+    });
   };
   const handleWheel = (e: WheelEvent) => {
     setScale((s) => Math.max(Math.min(s - e.deltaY / 600, 4), 0.25));
@@ -81,8 +84,8 @@ export default function GraphView() {
     .container {
       position: relative;
       display: grid;
-      width: calc(${width().toString()} * 1px);
-      height: calc(${height().toString()} * 1px);
+      width: ${width()};
+      height: ${height()};
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI, Roboto";
       user-select: none;
@@ -91,8 +94,8 @@ export default function GraphView() {
     }
     .nodes {
       position: absolute;
-      width: calc(${width().toString()} * 1px);
-      height: calc(${height().toString()} * 1px);
+      width: ${width()};
+      height: ${height()};
       background: transparent;
       transform-origin: 50% 50%;
       transform: translate(
@@ -102,8 +105,8 @@ export default function GraphView() {
         scale(${scale().toString()});
     }
     svg {
-      width: calc(${width().toString()} * 1px);
-      height: calc(${height().toString()} * 1px);
+      width: ${width()};
+      height: ${height()};
     }
     g {
       transform-origin: 50% 50%;

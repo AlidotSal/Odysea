@@ -1,17 +1,17 @@
 <div align="center">
 <h1><img width="800" src="./src/assets/banner.webp" alt="Solid Graph banner"><h1>
-<a href="https://npmjs.com/package/solid-graph"><img src="https://img.shields.io/npm/v/solid-graph?color=c63537" alt="npm version"></a>
-<a href="https://github.com/AlidotSal/solid-graph/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AlidotSal/solid-graph?color=446b9e" alt="gitHub license"></a>
-<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/github/languages/top/AlidotSal/solid-graph?color=446b9e" alt="top-language"></a>
-<img src="https://img.shields.io/github/languages/code-size/AlidotSal/solid-graph?color=446b9e" alt="code size">
-<a href="https://github.com/AlidotSal/solid-graph/stargazers"><img src="https://img.shields.io/github/stars/AlidotSal/solid-graph?color=446b9e" alt="repo stars"></a>
+<a href="https://npmjs.com/package/odysea"><img src="https://img.shields.io/npm/v/odysea?color=c63537" alt="npm version"></a>
+<a href="https://github.com/AlidotSal/odysea/blob/main/LICENSE"><img src="https://img.shields.io/github/license/AlidotSal/odysea?color=446b9e" alt="gitHub license"></a>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/github/languages/top/AlidotSal/odysea?color=446b9e" alt="top-language"></a>
+<img src="https://img.shields.io/github/languages/code-size/AlidotSal/odysea?color=446b9e" alt="code size">
+<a href="https://github.com/AlidotSal/odysea/stargazers"><img src="https://img.shields.io/github/stars/AlidotSal/odysea?color=446b9e" alt="repo stars"></a>
 
-### Convert Your Ideas To Graphs With Solid Graph!
+### Convert Your Ideas To A Simple And Excitig Journay With Odysea!
 
 <br/>
 </div>
 
-# Solid Graph
+# Odysea
 
 > A lightweight and minimal Solid component for building interactive graphs and node-based editors.
 
@@ -27,20 +27,20 @@
 The easiest way to get the latest version of Solid Graph is to install it via npm:
 
 ```bash
-npm install solid-graph # or yarn add
+npm install odysea # or yarn add
 ```
 
 ## Quick Start
 
 ```jsx
-import SolidGraph from "solid-graph";
+import Flow from "odysea";
 
 function Flow(props) {
-  return <SolidGraph nodes={props.nodes} edges={props.edges}></SolidGraph>;
+  return <Flow nodes={props.nodes} edges={props.edges}></Flow>;
 }
 ```
 
-## SolidGraph Props
+## Flow Component's Props
 
 | Name   | Type   | default | Description             |
 | ------ | ------ | ------- | ----------------------- |
@@ -52,10 +52,14 @@ function Flow(props) {
 ```jsx
 type Node = {
   id: number,
-  position: { x: number, y: number },
-  data: { label: string, ... },
+  data: T,
+  position: XYPosition,
+  inputPosition?: Position,
+  outputPosition?: Position,
   width?: number,
   height?: number,
+  inputHandle?: boolean,
+  outputHandle?: boolean,
   bgColor?: string,
   fontSize?: number,
   borderColor?: string,
@@ -67,9 +71,8 @@ type Edge = {
   source: number,
   target: number,
   label?: string,
-  type?: "straight" | "smoothStep" | "step",
+  type?: "bezier(default)" | "straight" | "smoothStep" | "step",
   animated?: boolean,
-  noHandle?: boolean,
   arrow?: boolean,
   style?: JSX.CSSProperties,
   labelStyle?: JSX.CSSProperties,
@@ -102,4 +105,4 @@ Solid Graph is heavily based on [react flow](https://github.com/wbkd/react-flow)
 
 ## License
 
-Solid Graph is [MIT licensed](https://github.com/AlidotSal/solid-graph/blob/main/LICENSE).
+Solid Graph is [MIT licensed](https://github.com/AlidotSal/odysea/blob/main/LICENSE).

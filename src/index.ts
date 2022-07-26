@@ -1,6 +1,6 @@
-import SolidGraph from "./containers/SolidGraph";
+import Flow from "./containers/Flow";
 
-export default SolidGraph;
+export default Flow;
 
 export { default as EdgeText } from "./components/Edges/EdgeText";
 export { default as StraightEdge } from "./components/Edges/StraightEdge";

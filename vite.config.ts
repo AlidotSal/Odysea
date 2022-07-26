@@ -22,8 +22,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       formats: ["es", "cjs"],
-      fileName: "solid-graph",
-      name: "SolidGraph",
+      fileName: "odysea",
+      name: "Odysea",
     },
     rollupOptions: {
       external: ["solid-js", "solid-js/web", "solid-js/store"],

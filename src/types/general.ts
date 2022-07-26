@@ -1,17 +1,39 @@
 import type { JSX } from "solid-js";
-import type { XYPosition } from "./utils";
+import type { Position, XYPosition } from "./utils";
 
-export interface NodeI<T = any> {
+export interface InitialNodeI<T = any> {
   id: number;
-  position: XYPosition;
   data: T;
+  position: XYPosition;
+  inputPosition?: Position;
+  outputPosition?: Position;
   width?: number;
   height?: number;
+  inputHandle?: boolean;
+  outputHandle?: boolean;
   bgColor?: string;
   fontSize?: number;
   borderColor?: string;
   borderRadius?: number;
   textColor?: string;
+}
+export interface NodeI<T = any> {
+  id: number;
+  data: T;
+  position: XYPosition;
+  inputPosition: Position;
+  outputPosition: Position;
+  width: number;
+  height: number;
+  inputHandle: boolean;
+  outputHandle: boolean;
+  bgColor?: string;
+  fontSize?: number;
+  borderColor?: string;
+  borderRadius?: number;
+  textColor?: string;
+  input: { x: number; y: number };
+  output: { x: number; y: number };
 }
 
 export interface EdgeI {
@@ -20,7 +42,6 @@ export interface EdgeI {
   label?: string;
   type?: string;
   animated?: boolean;
-  noHandle?: boolean;
   arrow?: boolean;
   style?: JSX.CSSProperties;
   labelStyle?: JSX.CSSProperties;
@@ -28,10 +49,10 @@ export interface EdgeI {
 }
 
 export interface StoreProps {
-  nodes: NodeI[];
+  nodes: InitialNodeI[];
   edges: EdgeI[];
-  width: number;
-  height: number;
+  width?: string;
+  height?: string;
   children: JSX.Element;
 }
 
@@ -43,13 +64,9 @@ export interface GraphProps {
 }
 
 export interface EdgeProps extends EdgeI {
-  sourceX: number;
-  sourceY: number;
-  targetX: number;
-  targetY: number;
-  sourcePosition: string;
-  targetPosition: string;
   path: string;
+  sourceNode: NodeI;
+  targetNode: NodeI;
 }
 
 export type HandleType = "source" | "target";

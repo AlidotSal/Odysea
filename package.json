@@ -1,18 +1,18 @@
 {
-  "name": "solid-graph",
+  "name": "odysea",
   "version": "0.1.17",
   "description": "A fast and lightweight SolidJS component library for building interactive node-based diagrams",
   "repository": {
-    "url": "https://github.com/AlidotSal/solid-graph.git",
+    "url": "https://github.com/AlidotSal/odysea.git",
     "type": "git"
   },
-  "homepage": "https://github.com/AlidotSal/solid-graph",
-  "main": "dist/solid-graph.umd.js",
-  "module": "dist/solid-graph.mjs",
+  "homepage": "https://github.com/AlidotSal/odysea",
+  "main": "dist/odysea.umd.js",
+  "module": "dist/odysea.mjs",
   "exports": {
     ".": {
-      "import": "./dist/solid-graph.mjs",
-      "require": "./dist/solid-graph.umd.js"
+      "import": "./dist/odysea.mjs",
+      "require": "./dist/odysea.umd.js"
     },
     "./package.json": "./package.json",
     "./dist/style.css": "./dist/style.css"

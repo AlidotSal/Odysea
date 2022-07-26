@@ -1,6 +1,5 @@
 import { createMemo } from "solid-js";
 import BaseEdge from "./BaseEdge";
-import { getParams } from "./utils";
 import { Position } from "../../types/utils";
 import type { EdgeI } from "../../types";
 import { useStore } from "../../store";
@@ -83,12 +82,20 @@ interface BezierProps {
 
 export default function BezierEdge(props: BezierProps) {
   const { store } = useStore();
-  const params = () => getParams(store, props.edge.source, props.edge.target);
+  const params = createMemo(() => ({
+    sourceX: store.nodes[props.edge.source].output.x,
+    sourceY: store.nodes[props.edge.source].output.y,
+    sourcePosition: store.nodes[props.edge.source].outputPosition,
+    targetX: store.nodes[props.edge.target].input.x,
+    targetY: store.nodes[props.edge.target].input.y,
+    targetPosition: store.nodes[props.edge.target].inputPosition,
+  }));
   const path = () => getSimpleBezierPath(params());
   const baseEdgeProps = createMemo(() => ({
     ...props.edge,
-    ...params(),
     path: path(),
+    sourceNode: store.nodes[props.edge.source],
+    targetNode: store.nodes[props.edge.target],
   }));
 
   return <BaseEdge baseEdgeProps={baseEdgeProps()} />;
