@@ -6,8 +6,8 @@ import type { InitialNodeI, EdgeI } from "../../types";
 interface Props {
   nodes: InitialNodeI[];
   edges: EdgeI[];
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
 }
 
 export default (props: Props) => {

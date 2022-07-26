@@ -46,8 +46,8 @@ function Flow(props) {
 | ------ | ------ | ------- | ----------------------- |
 | nodes  | Node[] | []      | array of nodes          |
 | edges  | Edge[] | []      | array of edges          |
-| width  | number | 800     | width of the container  |
-| height | number | 800     | height of the container |
+| width  | string | "800px" | width of the container  |
+| height | string | "800px" | height of the container |
 
 ```jsx
 type Node = {
