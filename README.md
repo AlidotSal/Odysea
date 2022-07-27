@@ -53,9 +53,9 @@ function Flow(props) {
 type Node = {
   id: number,
   data: T,
-  position: XYPosition,
-  inputPosition?: Position,
-  outputPosition?: Position,
+  position: { x: number, y: number },
+  inputPosition?: "top" | "bottom" | "left" | "right",
+  outputPosition?: "top" | "bottom" | "left" | "right",
   width?: number,
   height?: number,
   inputHandle?: boolean,
@@ -80,9 +80,9 @@ type Edge = {
 };
 ```
 
-## Example
+## Live Demo
 
-[Live Example On stackblitz](https://stackblitz.com/edit/vitejs-vite-2wlkrn?file=src/App.tsx)
+[Live Example On stackblitz](https://stackblitz.com/edit/vitejs-vite-3ardiv?file=src%2FApp.tsx)
 
 - Pan: alt + drag
 - Zoom: mouse wheel

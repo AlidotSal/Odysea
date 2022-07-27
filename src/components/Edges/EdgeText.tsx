@@ -44,8 +44,6 @@ export default function EdgeText(props: TextProps) {
       <rect
         fill="white"
         fill-opacity={props.bgStyle?.fill ? "0.8" : ".99"}
-        rx="2"
-        ry="2"
         width={box().width + 8}
         height={box().height + 3}
         {...props.bgStyle}

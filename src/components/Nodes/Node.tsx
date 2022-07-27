@@ -44,7 +44,7 @@ export default (props: NodeProps) => {
       border: 2px solid ${props.node.borderColor || "#252525"};
     }
     .selected {
-      border: 2px solid #446b9e;
+      border: 2px solid #9f3b41;
     }
     span {
       position: absolute;
@@ -58,14 +58,14 @@ export default (props: NodeProps) => {
     .input {
       top: calc(
         ${props.node.inputPosition === "bottom"
-            ? (props.node.height - 3).toString()
+            ? (props.node.height - 5).toString()
             : props.node.inputPosition === "top"
             ? "-3"
             : (props.node.height / 2 - 4).toString()} * 1px
       );
       left: calc(
         ${props.node.inputPosition === "right"
-            ? (props.node.width - 3).toString()
+            ? (props.node.width - 5).toString()
             : props.node.inputPosition === "left"
             ? "-3"
             : (props.node.width / 2 - 4).toString()} * 1px
@@ -76,14 +76,14 @@ export default (props: NodeProps) => {
         ${props.node.outputPosition === "bottom"
             ? (props.node.height - 5).toString()
             : props.node.outputPosition === "top"
-            ? "-5"
+            ? "-3"
             : (props.node.height / 2 - 4).toString()} * 1px
       );
       left: calc(
         ${props.node.outputPosition === "right"
             ? (props.node.width - 5).toString()
             : props.node.outputPosition === "left"
-            ? "-5"
+            ? "-3"
             : (props.node.width / 2 - 4).toString()} * 1px
       );
     }
