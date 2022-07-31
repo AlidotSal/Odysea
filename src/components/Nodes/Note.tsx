@@ -20,7 +20,7 @@ export default (props: NodeProps) => {
       color: ${props.node.textColor || "black"};
       background-color: ${props.node.bgColor || "#dede8c"};
       border-radius: 25px 0 0 0;
-      border: 1px solid ${props.node.borderColor || "#616161"};
+      border: 1px solid #616161;
       transform: translate(
         calc(${props.node.position.x.toString()} * 1px),
         calc(${props.node.position.y.toString()} * 1px)

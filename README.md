@@ -53,6 +53,7 @@ function Flow(props) {
 type Node = {
   id: number,
   data: T,
+  type: string ("regular(default)" | "dot" | "note" | "backdrop"),
   position: { x: number, y: number },
   inputPosition?: "top" | "bottom" | "left" | "right",
   outputPosition?: "top" | "bottom" | "left" | "right",
