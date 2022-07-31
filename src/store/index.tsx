@@ -1,11 +1,12 @@
 import { createSignal, createContext, useContext } from "solid-js";
-import type { Setter } from "solid-js";
 import { createStore } from "solid-js/store";
+import type { Setter } from "solid-js";
+import type { SetStoreFunction } from "solid-js/store";
 import type { NodeI, EdgeI, StoreProps } from "../types";
 import { Position } from "../types/utils";
 
 interface Nodes {
-  [key: number]: NodeI;
+  [key: string]: NodeI;
 }
 interface StoreI {
   nodes: Nodes;
@@ -17,14 +18,24 @@ const StoreContext = createContext();
 export const StoreProvider = (props: StoreProps) => {
   let nodes: Nodes = {};
   for (let i = 0; i < props.nodes.length; i++) {
+    const type = props.nodes[i]?.type || "default";
     nodes[props.nodes[i].id] = {
-      width: 160,
-      height: 40,
+      width: type === "dot" ? 11 : type === "backdrop" ? 220 : 160,
+      height:
+        type === "dot"
+          ? 11
+          : type === "note"
+          ? 80
+          : type === "backdrop"
+          ? 110
+          : 40,
+      type: "default",
       inputPosition: Position.Top,
       outputPosition: Position.Bottom,
       inputHandle: true,
       outputHandle: true,
       ...props.nodes[i],
+      // Todo: input and output should be simplified
       get input() {
         let x, y;
         switch (this.inputPosition) {
@@ -80,20 +91,33 @@ export const StoreProvider = (props: StoreProps) => {
   const [store, setStore] = createStore<StoreI>({ nodes, edges: props.edges });
   const [width, setWidth] = createSignal(props.width || "800px");
   const [height, setHeight] = createSignal(props.height || "800px");
-  const [selected, setSelected] = createSignal<number | null>(null);
+  const [selected, setSelected] = createSignal<string[]>([]);
+  const [isDragging, setDragging] = createSignal<boolean>(false);
   const [scale, setScale] = createSignal(1);
   const [transition, setTransition] = createSignal<[number, number]>([0, 0]);
 
-  const updatePosition = (xTrans: number, yTrans: number, nodeID: number) => {
-    setStore("nodes", nodeID, "position", (p) => ({
-      x: p.x + xTrans / scale(),
-      y: p.y + yTrans / scale(),
-    }));
+  // Todo: remove severl setStores
+  const updatePosition = (xTrans: number, yTrans: number, items: string[]) => {
+    items.forEach((id) => {
+      setStore("nodes", id, "position", (p) => ({
+        x: p.x + xTrans / scale(),
+        y: p.y + yTrans / scale(),
+      }));
+    });
+  };
+
+  const drag = (xTrans: number, yTrans: number, id: string) => {
+    setStore("nodes", id, "width", (w) => w + xTrans);
+    setStore("nodes", id, "height", (h) => h + yTrans);
   };
 
   const storeValue = {
     store,
+    setStore,
     updatePosition,
+    drag,
+    isDragging,
+    setDragging,
     width,
     setWidth,
     height,
@@ -115,13 +139,17 @@ export const StoreProvider = (props: StoreProps) => {
 
 interface UseStore {
   store: StoreI;
-  updatePosition: (x: number, y: number, nodeID: number) => void;
+  setStore: SetStoreFunction<StoreI>;
+  updatePosition: (x: number, y: number, items: string[]) => void;
+  drag: (x: number, y: number, id: string) => void;
+  isDragging: () => boolean;
+  setDragging: Setter<boolean>;
   width: () => string;
   setWidth: Setter<string>;
   height: () => string;
   setHeight: Setter<string>;
-  selected: () => number | null;
-  setSelected: Setter<number | null>;
+  selected: () => string[];
+  setSelected: Setter<string[]>;
   scale: () => number;
   setScale: Setter<number>;
   transition: () => [number, number];

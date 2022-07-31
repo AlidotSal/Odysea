@@ -1,11 +1,10 @@
 import { css } from "solid-styled";
-import { JSXElement, Show } from "solid-js";
+import { Show } from "solid-js";
 import { useStore } from "../../store";
 import type { NodeI } from "../../types";
 
 interface NodeProps {
   node: NodeI;
-  children: JSXElement;
 }
 
 export default (props: NodeProps) => {
@@ -36,15 +35,15 @@ export default (props: NodeProps) => {
       font-size: 0.875rem;
       line-height: 1.25rem;
       text-align: center;
-      width: calc(${(props.node.width || 160).toString()} * 1px);
-      height: calc(${(props.node.height || 40).toString()} * 1px);
+      width: calc(${props.node.width.toString()} * 1px);
+      height: calc(${props.node.height.toString()} * 1px);
       color: ${props.node.textColor || "black"};
       background-color: ${props.node.bgColor || "white"};
       border-radius: calc(${(props.node.borderRadius || 4).toString()} * 1px);
-      border: 2px solid ${props.node.borderColor || "#252525"};
+      border: 2px solid ${props.node.borderColor || "#616161"};
     }
     .selected {
-      border: 2px solid #9f3b41;
+      border: 2px solid #446b9e;
     }
     span {
       position: absolute;
@@ -95,10 +94,10 @@ export default (props: NodeProps) => {
         <span class="input"></span>
       </Show>
       <div
-        onPointerDown={() => setSelected(props.node.id)}
-        classList={{ selected: selected() === props.node.id }}
+        onPointerDown={() => setSelected([props.node.id])}
+        classList={{ selected: selected().includes(props.node.id) }}
       >
-        {props.children}
+        {props.node.data.label}
       </div>
       <Show when={props.node.outputHandle}>
         <span class="output"></span>

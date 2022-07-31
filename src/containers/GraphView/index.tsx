@@ -1,4 +1,4 @@
-import { onMount, onCleanup, For, Switch, Match } from "solid-js";
+import { onMount, onCleanup, For, Switch, Match, batch } from "solid-js";
 import { css } from "solid-styled";
 import { throttleRAF } from "../../utils";
 import { useStore } from "../../store";
@@ -6,7 +6,10 @@ import BezierEdge from "../../components/Edges/BezierEdge";
 import SmoothStepEdge from "../../components/Edges/SmoothStepEdge";
 import StepEdge from "../../components/Edges/StepEdge";
 import StraightEdge from "../../components/Edges/StraightEdge";
-import Node from "../../components/Nodes/Node";
+import Node from "../../components/Nodes/Default";
+import Dot from "../../components/Nodes/Dot";
+import Note from "../../components/Nodes/Note";
+import BackDrop from "../../components/Nodes/BackDrop";
 
 export default function GraphView() {
   let containerRef!: HTMLDivElement;
@@ -14,6 +17,9 @@ export default function GraphView() {
   const {
     store,
     updatePosition,
+    drag,
+    isDragging,
+    setDragging,
     selected,
     setSelected,
     width,
@@ -24,24 +30,25 @@ export default function GraphView() {
     setScale,
   } = useStore();
 
-  const handlePointerDown = () => setSelected(null);
+  const handlePointerDown = () => {
+    batch(() => {
+      setSelected([]);
+      setDragging(false);
+    });
+  };
   const handlePointerMove = (e: PointerEvent) => {
     throttleRAF(() => {
       if (e.buttons === 0) return;
 
-      if (e.pointerType === "mouse") {
-        if (selected()) {
-          updatePosition(e.movementX, e.movementY, selected()!);
+      if (!isDragging()) {
+        if (selected().length > 0) {
+          updatePosition(e.movementX, e.movementY, selected());
         }
-        if (!selected() && e.altKey) {
+        if (selected().length === 0 && e.altKey) {
           setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
         }
       } else {
-        if (selected()) {
-          updatePosition(e.movementX, e.movementY, selected()!);
-        } else {
-          setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
-        }
+        drag(e.movementX, e.movementY, selected()[0]);
       }
     });
   };
@@ -74,7 +81,14 @@ export default function GraphView() {
       * {
         box-sizing: border-box;
       }
-
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        margin: 0;
+        font-size: inherit;
+      }
       @keyframes dash {
         from {
           stroke-dashoffset: 20;
@@ -122,9 +136,19 @@ export default function GraphView() {
     <div ref={containerRef} class="container">
       <div class="nodes">
         <For each={Object.values(store.nodes)}>
-          {(node) => {
-            return <Node node={node}>{node.data.label}</Node>;
-          }}
+          {(node) => (
+            <Switch fallback={<Node node={node} />}>
+              <Match when={node.type === "dot"}>
+                <Dot node={node} />
+              </Match>
+              <Match when={node.type === "note"}>
+                <Note node={node} />
+              </Match>
+              <Match when={node.type === "backdrop"}>
+                <BackDrop node={node} />
+              </Match>
+            </Switch>
+          )}
         </For>
       </div>
 
@@ -132,19 +156,17 @@ export default function GraphView() {
         <g>
           <For each={store.edges}>
             {(edge) => (
-              <>
-                <Switch fallback={<BezierEdge edge={edge} />}>
-                  <Match when={edge.type === "straight"}>
-                    <StraightEdge edge={edge} />
-                  </Match>
-                  <Match when={edge.type === "smoothStep"}>
-                    <SmoothStepEdge edge={edge} />
-                  </Match>
-                  <Match when={edge.type === "step"}>
-                    <StepEdge edge={edge} />
-                  </Match>
-                </Switch>
-              </>
+              <Switch fallback={<BezierEdge edge={edge} />}>
+                <Match when={edge.type === "straight"}>
+                  <StraightEdge edge={edge} />
+                </Match>
+                <Match when={edge.type === "smoothStep"}>
+                  <SmoothStepEdge edge={edge} />
+                </Match>
+                <Match when={edge.type === "step"}>
+                  <StepEdge edge={edge} />
+                </Match>
+              </Switch>
             )}
           </For>
         </g>

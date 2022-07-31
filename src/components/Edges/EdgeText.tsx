@@ -43,16 +43,16 @@ export default function EdgeText(props: TextProps) {
     <g>
       <rect
         fill="white"
-        fill-opacity={props.bgStyle?.fill ? "0.8" : ".99"}
-        width={box().width + 8}
-        height={box().height + 3}
+        fill-opacity="0.9"
+        width={box().width + 12}
+        height={box().height + 1}
         {...props.bgStyle}
       />
       <text
         ref={edgeRef}
-        dx="5px"
-        dy=".7em"
-        font-size="10px"
+        dx="7px"
+        dy="0.6em"
+        font-size="11px"
         fill-opacity={props.style ? "1" : "0.8"}
         dominant-baseline="central"
         style={`fill:black; ${Object.entries(props.style || {})

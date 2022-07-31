@@ -15,11 +15,11 @@ export const getParams = (store: any, source: number, target: number) => {
   const targetNode = store.nodes[target];
   const sLeft = sourceNode.position.x;
   const sTop = sourceNode.position.y;
-  const sWidthHalf = (sourceNode.width || 160) / 2;
-  const sHeightHalf = sourceNode.height || 40;
+  const sWidthHalf = sourceNode.width / 2;
+  const sHeightHalf = sourceNode.height;
   const tLeft = targetNode.position.x;
   const tTop = targetNode.position.y;
-  const tWidthHalf = (targetNode.width || 160) / 2;
+  const tWidthHalf = targetNode.width / 2;
   const sourceX: number = sLeft + sWidthHalf;
   const sourceY: number = sTop + sHeightHalf;
   const targetX: number = tLeft + tWidthHalf;

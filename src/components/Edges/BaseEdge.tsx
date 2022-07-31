@@ -14,6 +14,7 @@ export default function BaseEdge(props: BaseProps) {
   if (!props.baseEdgeProps.targetNode.inputHandle) {
     createRenderEffect(() => {
       // calculate the distance of the arrow from the edge when there is no input handle
+      // TODO: move this section to each edge type component for accurate calcs
       const dx =
         props.baseEdgeProps.targetNode.input.x -
         props.baseEdgeProps.sourceNode.output.x;
@@ -50,7 +51,7 @@ export default function BaseEdge(props: BaseProps) {
           -Math.tan((theta / 180) * Math.PI);
         newValue = Math.sqrt(x * x + y * y);
       }
-      arrowDistance = `calc(100% - ${newValue + 7}px)`;
+      arrowDistance = `calc(100% - ${newValue + 9}px)`;
     });
   }
 
@@ -60,7 +61,7 @@ export default function BaseEdge(props: BaseProps) {
       stroke-dasharray: 10;
     }
     .arrow {
-      transform: translateY(3.5px) rotate(-90deg);
+      transform: translateY(4px) rotate(-90deg);
       offset-path: path(${'"' + props.baseEdgeProps.path + '"'});
       offset-distance: ${arrowDistance};
     }
@@ -73,6 +74,7 @@ export default function BaseEdge(props: BaseProps) {
         d={props.baseEdgeProps.path}
         fill="transparent"
         stroke="#636363"
+        stroke-linecap="round"
         stroke-width="1.2"
         aria-label="svg-path"
         {...props.baseEdgeProps.style}
@@ -82,7 +84,7 @@ export default function BaseEdge(props: BaseProps) {
       </Show>
       <Show when={props.baseEdgeProps.label}>
         <EdgeText
-          label={props.baseEdgeProps.label || ""}
+          label={props.baseEdgeProps.label!}
           style={props.baseEdgeProps.labelStyle}
           bgStyle={props.baseEdgeProps.labelBgStyle}
           path={props.baseEdgeProps.path}
