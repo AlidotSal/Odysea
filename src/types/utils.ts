@@ -34,4 +34,15 @@ export interface Box extends XYPosition {
 export type Transform = [number, number, number];
 
 //
-// export type CoordinateExtent = [[number, number], [number, number]];
+type HexDigit<T extends '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'a' | 'b' | 'c' | 'd' | 'e'| 'f' | 'A' | 'B' | 'C' | 'D' | 'E'| 'F'> = T;
+export type HexColor<T extends string> =
+    T extends `#${HexDigit<infer D1>}${HexDigit<infer D2>}${HexDigit<infer D3>}${infer Rest1}`
+        ? (Rest1 extends `` 
+            ? T // three-digit hex color
+            : (
+                Rest1 extends `${HexDigit<infer D4>}${HexDigit<infer D5>}${HexDigit<infer D6>}`
+                    ? T  // six-digit hex color
+                    : never
+            )
+        )
+        : never;

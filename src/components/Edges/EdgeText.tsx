@@ -1,5 +1,6 @@
 import { JSX, createSignal, onMount } from "solid-js";
 import { css } from "solid-styled";
+import { useStore } from "../../store";
 import type { Rect } from "../../types";
 
 interface TextProps {
@@ -13,6 +14,7 @@ interface TextProps {
 export default function EdgeText(props: TextProps) {
   let edgeRef!: SVGTextElement;
   const [box, setbox] = createSignal<Rect>({ x: 0, y: 0, width: 0, height: 0 });
+  const { canvasbg } = useStore();
 
   onMount(() => {
     if (edgeRef) {
@@ -42,11 +44,16 @@ export default function EdgeText(props: TextProps) {
   return (
     <g>
       <rect
-        fill="white"
-        fill-opacity="0.9"
+        fill={canvasbg() || "#f7f9fb"}
+        fill-opacity="0.96"
         width={box().width + 12}
         height={box().height + 1}
-        {...props.bgStyle}
+        style={`${Object.entries(props.bgStyle || {})
+          .map(([k, v]) => {
+            k = k.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
+            return `${k}:${v}`;
+          })
+          .join(";")}`}
       />
       <text
         ref={edgeRef}

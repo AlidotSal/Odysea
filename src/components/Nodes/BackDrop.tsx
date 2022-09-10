@@ -83,7 +83,7 @@ export default (props: NodeProps) => {
   return (
     <section onPointerDown={handleSelection}>
       <h1 classList={{ selected: selected().includes(props.node.id) }}>
-        {props.node.data.label}
+        {props.node.label}
       </h1>
       <span
         classList={{ selected: selected().includes(props.node.id) }}

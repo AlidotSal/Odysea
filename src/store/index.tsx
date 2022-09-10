@@ -91,6 +91,7 @@ export const StoreProvider = (props: StoreProps) => {
   const [store, setStore] = createStore<StoreI>({ nodes, edges: props.edges });
   const [width, setWidth] = createSignal(props.width || "800px");
   const [height, setHeight] = createSignal(props.height || "800px");
+  const [canvasbg, setCanvasbg] = createSignal(props.background || "#f7f9fb");
   const [selected, setSelected] = createSignal<string[]>([]);
   const [isDragging, setDragging] = createSignal<boolean>(false);
   const [scale, setScale] = createSignal(1);
@@ -122,6 +123,8 @@ export const StoreProvider = (props: StoreProps) => {
     setWidth,
     height,
     setHeight,
+    canvasbg,
+    setCanvasbg,
     selected,
     setSelected,
     scale,
@@ -148,6 +151,8 @@ interface UseStore {
   setWidth: Setter<string>;
   height: () => string;
   setHeight: Setter<string>;
+  canvasbg: () => string;
+  setCanvasbg: Setter<string>;
   selected: () => string[];
   setSelected: Setter<string[]>;
   scale: () => number;

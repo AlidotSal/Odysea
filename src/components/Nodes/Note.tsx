@@ -39,7 +39,7 @@ export default (props: NodeProps) => {
       onPointerDown={() => setSelected([props.node.id])}
       classList={{ selected: selected().includes(props.node.id) }}
     >
-      {props.node.data.label}
+      {props.node.label}
     </div>
   );
 };

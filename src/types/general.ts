@@ -1,9 +1,9 @@
 import type { JSX } from "solid-js";
 import type { Position, XYPosition } from "./utils";
 
-export interface InitialNodeI<T = any> {
+export interface InitialNodeI<> {
   id: string;
-  data: T;
+  label: string;
   type?: string;
   position: XYPosition;
   inputPosition?: Position;
@@ -18,9 +18,9 @@ export interface InitialNodeI<T = any> {
   borderRadius?: number;
   textColor?: string;
 }
-export interface NodeI<T = any> {
+export interface NodeI<> {
   id: string;
-  data: T;
+  label: string;
   type: string;
   position: XYPosition;
   inputPosition: Position;
@@ -39,13 +39,14 @@ export interface NodeI<T = any> {
 }
 
 export interface EdgeI {
-  source: number;
-  target: number;
+  id: string;
+  source: string;
+  target: string;
   label?: string;
   type?: string;
   animated?: boolean;
   arrow?: boolean;
-  style?: JSX.CSSProperties;
+  style?: JSX.PathSVGAttributes<SVGPathElement>;
   labelStyle?: JSX.CSSProperties;
   labelBgStyle?: JSX.CSSProperties;
 }
@@ -55,6 +56,7 @@ export interface StoreProps {
   edges: EdgeI[];
   width?: string;
   height?: string;
+  background?: string;
   children: JSX.Element;
 }
 

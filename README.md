@@ -51,7 +51,7 @@ function Flow(props) {
 
 ```jsx
 type Node = {
-  id: number,
+  id: string,
   data: T,
   type: string ("regular(default)" | "dot" | "note" | "backdrop"),
   position: { x: number, y: number },
@@ -69,8 +69,8 @@ type Node = {
 };
 
 type Edge = {
-  source: number,
-  target: number,
+  source: string,
+  target: string,
   label?: string,
   type?: "bezier(default)" | "straight" | "smoothStep" | "step",
   animated?: boolean,
@@ -87,6 +87,24 @@ type Edge = {
 
 - Pan: alt + drag
 - Zoom: mouse wheel
+
+## More Fine Grained API
+
+There is also other components if you need more control on your flow
+
+```jsx
+import Flow from "odysea";
+import { Node, Edge } from "odysea";
+
+function Flow(props) {
+  return (
+    <Flow nodes={props.nodes} edges={props.edges}>
+      <Node data={...} />
+      <Edge data={...} />
+    </Flow>
+  );
+}
+```
 
 ## Development
 

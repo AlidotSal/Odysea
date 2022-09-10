@@ -2,14 +2,8 @@ import { onMount, onCleanup, For, Switch, Match, batch } from "solid-js";
 import { css } from "solid-styled";
 import { throttleRAF } from "../../utils";
 import { useStore } from "../../store";
-import BezierEdge from "../../components/Edges/BezierEdge";
-import SmoothStepEdge from "../../components/Edges/SmoothStepEdge";
-import StepEdge from "../../components/Edges/StepEdge";
-import StraightEdge from "../../components/Edges/StraightEdge";
-import Node from "../../components/Nodes/Default";
-import Dot from "../../components/Nodes/Dot";
-import Note from "../../components/Nodes/Note";
-import BackDrop from "../../components/Nodes/BackDrop";
+import Edge from "../../components/Edges";
+import Node from "../../components/Nodes";
 
 export default function GraphView() {
   let containerRef!: HTMLDivElement;
@@ -24,6 +18,7 @@ export default function GraphView() {
     setSelected,
     width,
     height,
+    canvasbg,
     transition,
     setTransition,
     scale,
@@ -37,17 +32,36 @@ export default function GraphView() {
     });
   };
   const handlePointerMove = (e: PointerEvent) => {
+    // fix pan/zoom on mobile devices
     throttleRAF(() => {
       if (e.buttons === 0) return;
 
-      if (!isDragging()) {
-        if (selected().length > 0) {
-          updatePosition(e.movementX, e.movementY, selected());
+      if (e.pointerType === "mouse") {
+        if (!isDragging()) {
+          if (selected().length > 0) {
+            updatePosition(e.movementX, e.movementY, selected());
+            return;
+          }
+          if (selected().length === 0 && e.altKey) {
+            setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
+            return;
+          }
         }
-        if (selected().length === 0 && e.altKey) {
-          setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
+        drag(e.movementX, e.movementY, selected()[0]);
+        return;
+      }
+
+      if (e.pointerType === "touch") {
+        if (!isDragging()) {
+          if (selected().length > 0) {
+            updatePosition(e.movementX, e.movementY, selected());
+            return;
+          }
+          if (selected().length === 0) {
+            setTransition((t) => [t[0] + e.movementX, t[1] + e.movementY]);
+            return;
+          }
         }
-      } else {
         drag(e.movementX, e.movementY, selected()[0]);
       }
     });
@@ -100,6 +114,7 @@ export default function GraphView() {
       display: grid;
       width: ${width()};
       height: ${height()};
+      background-color: ${canvasbg()};
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI, Roboto";
       user-select: none;
@@ -136,39 +151,13 @@ export default function GraphView() {
     <div ref={containerRef} class="container">
       <div class="nodes">
         <For each={Object.values(store.nodes)}>
-          {(node) => (
-            <Switch fallback={<Node node={node} />}>
-              <Match when={node.type === "dot"}>
-                <Dot node={node} />
-              </Match>
-              <Match when={node.type === "note"}>
-                <Note node={node} />
-              </Match>
-              <Match when={node.type === "backdrop"}>
-                <BackDrop node={node} />
-              </Match>
-            </Switch>
-          )}
+          {(node) => <Node node={node} />}
         </For>
       </div>
 
       <svg>
         <g>
-          <For each={store.edges}>
-            {(edge) => (
-              <Switch fallback={<BezierEdge edge={edge} />}>
-                <Match when={edge.type === "straight"}>
-                  <StraightEdge edge={edge} />
-                </Match>
-                <Match when={edge.type === "smoothStep"}>
-                  <SmoothStepEdge edge={edge} />
-                </Match>
-                <Match when={edge.type === "step"}>
-                  <StepEdge edge={edge} />
-                </Match>
-              </Switch>
-            )}
-          </For>
+          <For each={store.edges}>{(edge) => <Edge edge={edge} />}</For>
         </g>
       </svg>
     </div>
