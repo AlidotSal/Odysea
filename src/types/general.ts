@@ -1,7 +1,7 @@
 import type { JSX } from "solid-js";
 import type { Position, XYPosition } from "./utils";
 
-export interface InitialNodeI<> {
+export interface InitialNodeI {
   id: string;
   label: string;
   type?: string;
@@ -18,7 +18,7 @@ export interface InitialNodeI<> {
   borderRadius?: number;
   textColor?: string;
 }
-export interface NodeI<> {
+export interface NodeI {
   id: string;
   label: string;
   type: string;
