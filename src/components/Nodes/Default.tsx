@@ -4,13 +4,13 @@ import { useStore } from "../../store";
 import type { NodeI } from "../../types";
 
 interface NodeProps {
-  node: NodeI;
+	node: NodeI;
 }
 
 export default (props: NodeProps) => {
-  const { selected, setSelected } = useStore();
+	const { selected, setSelected } = useStore();
 
-  css`
+	css`
     section {
       position: absolute;
       transform: translate3d(
@@ -21,7 +21,7 @@ export default (props: NodeProps) => {
     }
     section:hover {
       filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1))
-        drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+        drop-shadow(0 1px 1px rgb(0 0 0 / 0.2));
       z-index: 9;
     }
     div {
@@ -56,52 +56,60 @@ export default (props: NodeProps) => {
     }
     .input {
       top: calc(
-        ${props.node.inputPosition === "bottom"
-            ? (props.node.height - 5).toString()
-            : props.node.inputPosition === "top"
-            ? "-3"
-            : (props.node.height / 2 - 4).toString()} * 1px
+        ${
+					props.node.inputPosition === "bottom"
+						? (props.node.height - 5).toString()
+						: props.node.inputPosition === "top"
+						? "-3"
+						: (props.node.height / 2 - 4).toString()
+				} * 1px
       );
       left: calc(
-        ${props.node.inputPosition === "right"
-            ? (props.node.width - 5).toString()
-            : props.node.inputPosition === "left"
-            ? "-3"
-            : (props.node.width / 2 - 4).toString()} * 1px
+        ${
+					props.node.inputPosition === "right"
+						? (props.node.width - 5).toString()
+						: props.node.inputPosition === "left"
+						? "-3"
+						: (props.node.width / 2 - 4).toString()
+				} * 1px
       );
     }
     .output {
       top: calc(
-        ${props.node.outputPosition === "bottom"
-            ? (props.node.height - 5).toString()
-            : props.node.outputPosition === "top"
-            ? "-3"
-            : (props.node.height / 2 - 4).toString()} * 1px
+        ${
+					props.node.outputPosition === "bottom"
+						? (props.node.height - 5).toString()
+						: props.node.outputPosition === "top"
+						? "-3"
+						: (props.node.height / 2 - 4).toString()
+				} * 1px
       );
       left: calc(
-        ${props.node.outputPosition === "right"
-            ? (props.node.width - 5).toString()
-            : props.node.outputPosition === "left"
-            ? "-3"
-            : (props.node.width / 2 - 4).toString()} * 1px
+        ${
+					props.node.outputPosition === "right"
+						? (props.node.width - 5).toString()
+						: props.node.outputPosition === "left"
+						? "-3"
+						: (props.node.width / 2 - 4).toString()
+				} * 1px
       );
     }
   `;
 
-  return (
-    <section>
-      <Show when={props.node.inputHandle}>
-        <span class="input"></span>
-      </Show>
-      <div
-        onPointerDown={() => setSelected([props.node.id])}
-        classList={{ selected: selected().includes(props.node.id) }}
-      >
-        {props.node.label}
-      </div>
-      <Show when={props.node.outputHandle}>
-        <span class="output"></span>
-      </Show>
-    </section>
-  );
+	return (
+		<section>
+			<Show when={props.node.inputHandle}>
+				<span class="input" />
+			</Show>
+			<div
+				data-id={props.node.id}
+				classList={{ selected: selected().includes(props.node.id) }}
+			>
+				{props.node.label}
+			</div>
+			<Show when={props.node.outputHandle}>
+				<span class="output" />
+			</Show>
+		</section>
+	);
 };

@@ -3,13 +3,13 @@ import { useStore } from "../../store";
 import type { NodeI } from "../../types";
 
 interface NodeProps {
-  node: NodeI;
+	node: NodeI;
 }
 
 export default (props: NodeProps) => {
-  const { selected, setSelected } = useStore();
+	const { selected, setSelected } = useStore();
 
-  css`
+	css`
     div {
       position: absolute;
       user-select: none;
@@ -33,10 +33,10 @@ export default (props: NodeProps) => {
     }
   `;
 
-  return (
-    <div
-      onPointerDown={() => setSelected([props.node.id])}
-      classList={{ selected: selected().includes(props.node.id) }}
-    ></div>
-  );
+	return (
+		<div
+			data-id={props.node.id}
+			classList={{ selected: selected().includes(props.node.id) }}
+		/>
+	);
 };

@@ -19,11 +19,12 @@ export default (props: NodeProps) => {
           centerX < props.node.position.x + props.node.width &&
           centerY > props.node.position.y &&
           centerY < props.node.position.y + props.node.height
-        )
+        ) {
           resultes.push(obj[0]);
+        }
         return resultes;
       },
-      []
+      [],
     );
     setSelected(nodesInside);
   }
@@ -32,7 +33,9 @@ export default (props: NodeProps) => {
     section {
       position: absolute;
       cursor: grab;
+      min-width: 5rem;
       width: calc(${props.node.width.toString()} * 1px);
+      min-height: 2rem;
       height: calc(${props.node.height.toString()} * 1px);
       color: ${props.node.textColor || "black"};
       background-color: rgb(0 110 250 / 0.1);
@@ -81,18 +84,18 @@ export default (props: NodeProps) => {
   `;
 
   return (
-    <section onPointerDown={handleSelection}>
-      <h1 classList={{ selected: selected().includes(props.node.id) }}>
+    <section>
+      <h1
+        onPointerDown={handleSelection}
+        classList={{ selected: selected().includes(props.node.id) }}
+      >
         {props.node.label}
       </h1>
       <span
+        data-id={props.node.id}
+        data-action="drag"
         classList={{ selected: selected().includes(props.node.id) }}
-        onPointerDown={(e) => {
-          e.stopPropagation();
-          setSelected([props.node.id]);
-          setDragging(true);
-        }}
-      ></span>
+      />
     </section>
   );
 };
