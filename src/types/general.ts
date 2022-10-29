@@ -3,7 +3,7 @@ import type { Position, XYPosition } from "./utils";
 
 export interface InitialNodeI {
 	id: string;
-	label: string;
+	label?: string;
 	type?: string;
 	position: XYPosition;
 	inputPosition?: Position;

@@ -7,7 +7,7 @@ interface NodeProps {
 }
 
 export default (props: NodeProps) => {
-	const { selected, setSelected } = useStore();
+	const { selected } = useStore();
 
 	css`
     div {
@@ -17,7 +17,7 @@ export default (props: NodeProps) => {
       overscroll-behavior: auto;
       width: 11px;
       height: 11px;
-      background-color: #fff;
+      background-color: ${props.node.bgColor || "white"};
       border-radius: 50%;
       border: 1px solid #616161;
       transform: translate(
@@ -28,15 +28,17 @@ export default (props: NodeProps) => {
     div:hover {
       z-index: 9;
     }
-    .selected {
+    .selected > div {
       border: 2px solid #446b9e;
     }
   `;
 
 	return (
-		<div
-			data-id={props.node.id}
+		<section
 			classList={{ selected: selected().includes(props.node.id) }}
-		/>
+			data-id={props.node.id}
+		>
+			<div />
+		</section>
 	);
 };

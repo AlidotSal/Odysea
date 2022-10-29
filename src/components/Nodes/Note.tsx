@@ -7,7 +7,7 @@ interface NodeProps {
 }
 
 export default (props: NodeProps) => {
-	const { selected, setSelected } = useStore();
+	const { selected } = useStore();
 
 	css`
     div {
@@ -30,17 +30,17 @@ export default (props: NodeProps) => {
     div:hover {
       z-index: 9;
     }
-    .selected {
+    .selected . div {
       border: 1px solid #446b9e;
     }
   `;
 
 	return (
-		<div
-			data-id={props.node.id}
+		<section
 			classList={{ selected: selected().includes(props.node.id) }}
+			data-id={props.node.id}
 		>
-			{props.node.label}
-		</div>
+			<div>{props.node.label}</div>
+		</section>
 	);
 };

@@ -8,20 +8,24 @@ interface NodeProps {
 }
 
 export default (props: NodeProps) => {
-	const { selected, setSelected } = useStore();
+	const { selected } = useStore();
 
 	css`
     section {
       position: absolute;
-      transform: translate3d(
+      transform: translate(
         calc(${props.node.position.x.toString()} * 1px),
-        calc(${props.node.position.y.toString()} * 1px),
-        0
+        calc(${props.node.position.y.toString()} * 1px)
       );
     }
     section:hover {
       filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1))
         drop-shadow(0 1px 1px rgb(0 0 0 / 0.2));
+        z-index: 8;
+    }
+    .selected {
+      filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1))
+      drop-shadow(0 1px 1px rgb(0 0 0 / 0.2));
       z-index: 9;
     }
     div {
@@ -42,7 +46,7 @@ export default (props: NodeProps) => {
       border-radius: calc(${(props.node.borderRadius || 4).toString()} * 1px);
       border: 2px solid ${props.node.borderColor || "#616161"};
     }
-    .selected {
+    .selected > div {
       border: 2px solid #446b9e;
     }
     span {
@@ -97,16 +101,14 @@ export default (props: NodeProps) => {
   `;
 
 	return (
-		<section>
+		<section
+			classList={{ selected: selected().includes(props.node.id) }}
+			data-id={props.node.id}
+		>
 			<Show when={props.node.inputHandle}>
 				<span class="input" />
 			</Show>
-			<div
-				data-id={props.node.id}
-				classList={{ selected: selected().includes(props.node.id) }}
-			>
-				{props.node.label}
-			</div>
+			<div>{props.node.label}</div>
 			<Show when={props.node.outputHandle}>
 				<span class="output" />
 			</Show>

@@ -4,6 +4,7 @@ import { throttleRAF } from "../../utils";
 import { useStore } from "../../store";
 import Edge from "../../components/Edges";
 import Node from "../../components/Nodes";
+import Rectangle from "../../components/Utility/Rectangle";
 
 export default function GraphView() {
 	let containerRef!: HTMLDivElement;
@@ -26,10 +27,13 @@ export default function GraphView() {
 	} = useStore();
 
 	const handlePointerDown = (event: PointerEvent) => {
-		if (event.target instanceof HTMLElement) {
-			const nodeId = event.target.dataset.id;
+		if (
+			event.target instanceof HTMLElement ||
+			event.target instanceof SVGElement
+		) {
+			const parent = event.target.parentElement as HTMLElement;
+			const nodeId = parent.dataset.id;
 			const action = event.target.dataset.action;
-			console.log(nodeId, action);
 			nodeId ? setSelected([nodeId]) : setSelected([]);
 			action === "drag" ? setDragging(true) : setDragging(false);
 		} else {
@@ -164,17 +168,28 @@ export default function GraphView() {
 
 	return (
 		<div ref={containerRef} class="container">
-			<div class="nodes">
-				<For each={Object.values(store.nodes)}>
-					{(node) => <Node node={node} />}
-				</For>
-			</div>
-
 			<svg>
 				<g>
+					<For each={Object.values(store.nodes)}>
+						{(node) =>
+							node.type === "backdrop" ? (
+								<Rectangle
+									x={node.position.x}
+									y={node.position.y}
+									width={node.width}
+									height={node.height}
+									color={node.bgColor}
+								/>
+							) : null}
+					</For>
 					<For each={store.edges}>{(edge) => <Edge edge={edge} />}</For>
 				</g>
 			</svg>
+			<div class="nodes">
+				<For each={Object.values(store.nodes)}>
+					{(node) => (node ? <Node node={node} /> : null)}
+				</For>
+			</div>
 		</div>
 	);
 }

@@ -1,12 +1,12 @@
 import { createSignal, createContext, useContext } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createStore, produce } from "solid-js/store";
 import type { Setter } from "solid-js";
 import type { SetStoreFunction } from "solid-js/store";
 import type { NodeI, EdgeI, StoreProps } from "../types";
 import { Position } from "../types/utils";
 
 interface Nodes {
-	[key: string]: NodeI | undefined;
+	[key: string]: NodeI;
 }
 interface StoreI {
 	nodes: Nodes;
@@ -25,10 +25,11 @@ export const StoreProvider = (props: StoreProps) => {
 				type === "dot"
 					? 11
 					: type === "note"
-						? 80
-						: type === "backdrop"
-							? 110
-							: 40,
+					? 80
+					: type === "backdrop"
+					? 110
+					: 40,
+			label: "",
 			type: "default",
 			inputPosition: Position.Top,
 			outputPosition: Position.Bottom,
@@ -105,19 +106,24 @@ export const StoreProvider = (props: StoreProps) => {
 	const [scale, setScale] = createSignal(1);
 	const [transition, setTransition] = createSignal<[number, number]>([0, 0]);
 
-	// Todo: remove severl setStores
 	const updatePosition = (xTrans: number, yTrans: number, items: string[]) => {
-		for (let i = 0; i < items.length; ++i) {
-			setStore("nodes", items[i], "position", (p) => ({
-				x: p.x + xTrans / scale(),
-				y: p.y + yTrans / scale(),
-			}));
-		}
+		setStore(
+			produce((s) => {
+				for (let i = 0; i < items.length; i++) {
+					s.nodes[items[i]].position.x += xTrans / scale();
+					s.nodes[items[i]].position.y += yTrans / scale();
+				}
+			}),
+		);
 	};
 
 	const drag = (xTrans: number, yTrans: number, id: string) => {
-		setStore("nodes", id, "width", (w) => w + xTrans);
-		setStore("nodes", id, "height", (h) => h + yTrans);
+		setStore(
+			produce((s) => {
+				s.nodes[id].width += xTrans;
+				s.nodes[id].height += yTrans;
+			}),
+		);
 	};
 
 	const storeValue = {
