@@ -37,7 +37,7 @@ export default (props: NodeProps) => {
       position: absolute;
       min-width: 5rem;
       width: calc(${props.node.width.toString()} * 1px);
-      min-height: 2rem;
+      min-height: 5rem;
       height: calc(${props.node.height.toString()} * 1px);
       color: ${props.node.textColor || "black"};
       transform: translate(
@@ -54,7 +54,7 @@ export default (props: NodeProps) => {
       background-color: rgb(255 255 255 / 0.5);
     }
     .selected > h1 {
-      background-color: rgb(196 84 89 / 0.4);
+      background-color: rgb(235 177 52 / 0.5);
     }
     span {
       position: absolute;
@@ -76,8 +76,8 @@ export default (props: NodeProps) => {
         135deg,
         transparent 0%,
         transparent 50%,
-        rgb(196 84 89 / 0.4) 50%,
-        rgb(196 84 89 / 0.4) 100%
+        rgb(235 177 52 / 0.5) 50%,
+        rgb(235 177 52 / 0.5) 100%
       );
     }
     span:hover {

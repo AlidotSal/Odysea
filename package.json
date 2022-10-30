@@ -1,6 +1,6 @@
 {
   "name": "odysea",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A fast and lightweight SolidJS component library for building interactive node-based diagrams",
   "repository": {
     "url": "https://github.com/AlidotSal/odysea.git",

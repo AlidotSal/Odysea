@@ -18,7 +18,7 @@ export default function BaseEdge(props: rectProps) {
 
 	return (
 		<rect
-			fill={props.color}
+			fill={props.color ?? "#adadad"}
 			shape-rendering="optimizeSpeed"
 			x={props.x}
 			y={props.y}
