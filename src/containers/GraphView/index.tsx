@@ -7,109 +7,101 @@ import Node from "../../components/Nodes";
 import Rectangle from "../../components/Utility/Rectangle";
 
 export default function GraphView() {
-	let containerRef!: HTMLDivElement;
+  let containerRef!: HTMLDivElement;
 
-	const {
-		store,
-		updatePosition,
-		drag,
-		isDragging,
-		setDragging,
-		selected,
-		setSelected,
-		width,
-		height,
-		canvasbg,
-		transition,
-		setTransition,
-		scale,
-		setScale,
-	} = useStore();
+  const {
+    store,
+    updatePosition,
+    drag,
+    isDragging,
+    setDragging,
+    selected,
+    setSelected,
+    width,
+    height,
+    canvasbg,
+    transition,
+    setTransition,
+    scale,
+    setScale,
+  } = useStore();
 
-	const handlePointerDown = (event: PointerEvent) => {
-		if (
-			event.target instanceof HTMLElement ||
-			event.target instanceof SVGElement
-		) {
-			const parent = event.target.parentElement as HTMLElement;
-			const nodeId = parent.dataset.id;
-			const action = event.target.dataset.action;
-			nodeId ? setSelected([nodeId]) : setSelected([]);
-			action === "drag" ? setDragging(true) : setDragging(false);
-		} else {
-			return;
-		}
-	};
-	const handlePointerMove = (event: PointerEvent) => {
-		// fix pan/zoom on mobile devices
-		throttleRAF(() => {
-			if (event.buttons === 0) {
-				return;
-			}
-			if (event.pointerType === "mouse") {
-				if (isDragging()) {
-					drag(event.movementX, event.movementY, selected()[0]);
-					return;
-				} else {
-					if (selected().length > 0) {
-						updatePosition(event.movementX, event.movementY, selected());
-						return;
-					}
-					if (selected().length === 0 && event.altKey) {
-						setTransition((t) => [
-							t[0] + event.movementX,
-							t[1] + event.movementY,
-						]);
-						return;
-					}
-				}
-			}
+  const handlePointerDown = (event: PointerEvent) => {
+    if (event.target instanceof HTMLElement || event.target instanceof SVGElement) {
+      const parent = event.target.parentElement as HTMLElement;
+      const nodeId = parent.dataset.id;
+      const action = event.target.dataset.action;
+      nodeId ? setSelected([nodeId]) : setSelected([]);
+      action === "drag" ? setDragging(true) : setDragging(false);
+    } else {
+      return;
+    }
+  };
+  const handlePointerMove = (event: PointerEvent) => {
+    // fix pan/zoom on mobile devices
+    throttleRAF(() => {
+      if (event.buttons === 0) {
+        return;
+      }
+      if (event.pointerType === "mouse") {
+        if (isDragging()) {
+          drag(event.movementX, event.movementY, selected()[0]);
+          return;
+        } else {
+          if (selected().length > 0) {
+            updatePosition(event.movementX, event.movementY, selected());
+            return;
+          }
+          if (selected().length === 0 && event.altKey) {
+            setTransition((t) => [t[0] + event.movementX, t[1] + event.movementY]);
+            return;
+          }
+        }
+      }
 
-			if (event.pointerType === "touch") {
-				if (isDragging()) {
-					drag(event.movementX, event.movementY, selected()[0]);
-					return;
-				} else {
-					if (selected().length > 0) {
-						updatePosition(event.movementX, event.movementY, selected());
-						return;
-					}
-					if (selected().length === 0 && event.altKey) {
-						setTransition((t) => [
-							t[0] + event.movementX,
-							t[1] + event.movementY,
-						]);
-						return;
-					}
-				}
-			}
-		});
-	};
-	const handleWheel = (e: WheelEvent) => {
-		setScale((s) => Math.max(Math.min(s - e.deltaY / 600, 4), 0.25));
-	};
-	const handleGesture = (e: any) => {
-		if (e.scale < 1.0) {
-			setScale(Math.max(e.scale, 0.25));
-		} else if (e.scale > 1.0) {
-			setScale(Math.min(e.scale, 4));
-		}
-	};
+      if (event.pointerType === "touch") {
+        if (isDragging()) {
+          drag(event.movementX, event.movementY, selected()[0]);
+          return;
+        } else {
+          if (selected().length > 0) {
+            updatePosition(event.movementX, event.movementY, selected());
+            return;
+          }
+          if (selected().length === 0 && event.altKey) {
+            setTransition((t) => [t[0] + event.movementX, t[1] + event.movementY]);
+            return;
+          }
+        }
+      }
+    });
+  };
+  const handleWheel = (e: WheelEvent) => {
+    e.preventDefault();
+    setScale((s) => Math.max(Math.min(s - e.deltaY / 600, 4), 0.25));
+  };
+  const handleGesture = (e: any) => {
+    if (e.scale < 1.0) {
+      setScale(Math.max(e.scale, 0.25));
+    } else if (e.scale > 1.0) {
+      setScale(Math.min(e.scale, 4));
+    }
+  };
 
-	onMount(() => {
-		containerRef.addEventListener("pointerdown", handlePointerDown);
-		containerRef.addEventListener("pointermove", handlePointerMove);
-		containerRef.addEventListener("wheel", handleWheel);
-		containerRef.addEventListener("gestureend", handleGesture);
-	});
-	onCleanup(() => {
-		containerRef.removeEventListener("pointerdown", handlePointerDown);
-		containerRef.removeEventListener("pointermove", handlePointerMove);
-		containerRef.removeEventListener("wheel", handleWheel);
-		containerRef.addEventListener("gestureend", handleGesture);
-	});
+  onMount(() => {
+    containerRef.addEventListener("pointerdown", handlePointerDown);
+    containerRef.addEventListener("pointermove", handlePointerMove);
+    containerRef.addEventListener("wheel", handleWheel);
+    containerRef.addEventListener("gestureend", handleGesture);
+  });
+  onCleanup(() => {
+    containerRef.removeEventListener("pointerdown", handlePointerDown);
+    containerRef.removeEventListener("pointermove", handlePointerMove);
+    containerRef.removeEventListener("wheel", handleWheel);
+    containerRef.addEventListener("gestureend", handleGesture);
+  });
 
-	css`
+  css`
     @global {
       * {
         box-sizing: border-box;
@@ -166,30 +158,31 @@ export default function GraphView() {
     }
   `;
 
-	return (
-		<div ref={containerRef} class="container">
-			<svg>
-				<g>
-					<For each={Object.values(store.nodes)}>
-						{(node) =>
-							node.type === "backdrop" ? (
-								<Rectangle
-									x={node.position.x}
-									y={node.position.y}
-									width={node.width}
-									height={node.height}
-									color={node.bgColor}
-								/>
-							) : null}
-					</For>
-					<For each={store.edges}>{(edge) => <Edge edge={edge} />}</For>
-				</g>
-			</svg>
-			<div class="nodes">
-				<For each={Object.values(store.nodes)}>
-					{(node) => (node ? <Node node={node} /> : null)}
-				</For>
-			</div>
-		</div>
-	);
+  return (
+    <div ref={containerRef} class="container">
+      <svg>
+        <g>
+          <For each={Object.values(store.nodes)}>
+            {(node) =>
+              node.type === "backdrop" ? (
+                <Rectangle
+                  x={node.position.x}
+                  y={node.position.y}
+                  width={node.width}
+                  height={node.height}
+                  color={node.bgColor}
+                />
+              ) : null
+            }
+          </For>
+          <For each={store.edges}>{(edge) => <Edge edge={edge} />}</For>
+        </g>
+      </svg>
+      <div class="nodes">
+        <For each={Object.values(store.nodes)}>
+          {(node) => (node ? <Node node={node} /> : null)}
+        </For>
+      </div>
+    </div>
+  );
 }

@@ -3,36 +3,32 @@ import { useStore } from "../../store";
 import type { NodeI } from "../../types";
 
 interface NodeProps {
-	node: NodeI;
+  node: NodeI;
 }
 
 export default (props: NodeProps) => {
-	const { store, selected, setSelected } = useStore();
+  const { store, selected, setSelected } = useStore();
 
-	function handleSelection() {
-		const nodes = Object.keys(store.nodes);
-		const nodesInside = [];
-		for (let index = 0; index < nodes.length; index++) {
-			const node = nodes[index];
-			const centerX =
-				(store.nodes[node]?.position.x ?? 0) +
-				(store.nodes[node]?.width ?? 0) / 2;
-			const centerY =
-				(store.nodes[node]?.position.y ?? 0) +
-				(store.nodes[node]?.height ?? 0) / 2;
-			if (
-				centerX > props.node.position.x &&
-				centerX < props.node.position.x + props.node.width &&
-				centerY > props.node.position.y &&
-				centerY < props.node.position.y + props.node.height
-			) {
-				nodesInside.push(node);
-			}
-		}
-		setSelected(nodesInside);
-	}
+  function handleSelection() {
+    const nodes = Object.keys(store.nodes);
+    const nodesInside = [];
+    for (let index = 0; index < nodes.length; index++) {
+      const node = nodes[index];
+      const centerX = (store.nodes[node]?.position.x ?? 0) + (store.nodes[node]?.width ?? 0) / 2;
+      const centerY = (store.nodes[node]?.position.y ?? 0) + (store.nodes[node]?.height ?? 0) / 2;
+      if (
+        centerX > props.node.position.x &&
+        centerX < props.node.position.x + props.node.width &&
+        centerY > props.node.position.y &&
+        centerY < props.node.position.y + props.node.height
+      ) {
+        nodesInside.push(node);
+      }
+    }
+    setSelected(nodesInside);
+  }
 
-	css`
+  css`
     section {
       position: absolute;
       min-width: 5rem;
@@ -85,13 +81,10 @@ export default (props: NodeProps) => {
     }
   `;
 
-	return (
-		<section
-			classList={{ selected: selected().includes(props.node.id) }}
-			data-id={props.node.id}
-		>
-			<h1 onPointerDown={handleSelection}>{props.node.label}</h1>
-			<span data-action="drag" />
-		</section>
-	);
+  return (
+    <section classList={{ selected: selected().includes(props.node.id) }} data-id={props.node.id}>
+      <h1 onPointerDown={handleSelection}>{props.node.label}</h1>
+      <span data-action="drag" />
+    </section>
+  );
 };

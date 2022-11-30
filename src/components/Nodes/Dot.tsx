@@ -3,20 +3,20 @@ import { useStore } from "../../store";
 import type { NodeI } from "../../types";
 
 interface NodeProps {
-	node: NodeI;
+  node: NodeI;
 }
 
 export default (props: NodeProps) => {
-	const { selected } = useStore();
+  const { selected } = useStore();
 
-	css`
+  css`
     div {
       position: absolute;
       user-select: none;
       cursor: grab;
       overscroll-behavior: auto;
-      width: 11px;
-      height: 11px;
+      width: calc(${props.node.width.toString()} * 1px);
+      height: calc(${props.node.height.toString()} * 1px);
       background-color: ${props.node.bgColor || "white"};
       border-radius: 50%;
       border: 1px solid #616161;
@@ -33,12 +33,9 @@ export default (props: NodeProps) => {
     }
   `;
 
-	return (
-		<section
-			classList={{ selected: selected().includes(props.node.id) }}
-			data-id={props.node.id}
-		>
-			<div />
-		</section>
-	);
+  return (
+    <section classList={{ selected: selected().includes(props.node.id) }} data-id={props.node.id}>
+      <div />
+    </section>
+  );
 };

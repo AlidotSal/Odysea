@@ -3,13 +3,13 @@ import { useStore } from "../../store";
 import type { NodeI } from "../../types";
 
 interface NodeProps {
-	node: NodeI;
+  node: NodeI;
 }
 
 export default (props: NodeProps) => {
-	const { selected } = useStore();
+  const { selected } = useStore();
 
-	css`
+  css`
     div {
       position: absolute;
       padding: 0.5rem 0.8rem;
@@ -35,12 +35,9 @@ export default (props: NodeProps) => {
     }
   `;
 
-	return (
-		<section
-			classList={{ selected: selected().includes(props.node.id) }}
-			data-id={props.node.id}
-		>
-			<div>{props.node.label}</div>
-		</section>
-	);
+  return (
+    <section classList={{ selected: selected().includes(props.node.id) }} data-id={props.node.id}>
+      <div>{props.node.label}</div>
+    </section>
+  );
 };
