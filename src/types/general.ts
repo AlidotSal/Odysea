@@ -1,19 +1,18 @@
 import type { JSX } from "solid-js";
-import type { Position, XYPosition } from "./utils";
 
 export interface InitialNodeI {
   id: string;
+  position: [number, number];
   label?: string;
   type?: string;
-  position: XYPosition;
-  inputPosition?: Position;
-  outputPosition?: Position;
+  inputPosition?: "top" | "bottom" | "right" | "left";
+  outputPosition?: "top" | "bottom" | "right" | "left";
   width?: number;
   height?: number;
   inputHandle?: boolean;
   outputHandle?: boolean;
   bgColor?: string;
-  fontSize?: number;
+  fontSize?: string;
   borderColor?: string;
   borderRadius?: number;
   textColor?: string;
@@ -22,23 +21,24 @@ export interface NodeI {
   id: string;
   label: string;
   type: string;
-  position: XYPosition;
-  inputPosition: Position;
-  outputPosition: Position;
+  position: [number, number];
+  inputPosition: "top" | "bottom" | "right" | "left";
+  outputPosition: "top" | "bottom" | "right" | "left";
   width: number;
   height: number;
   inputHandle: boolean;
   outputHandle: boolean;
   bgColor?: string;
-  fontSize?: number;
+  fontSize: string;
   borderColor?: string;
   borderRadius?: number;
   textColor?: string;
   input: { x: number; y: number };
   output: { x: number; y: number };
+  selected: boolean;
 }
 
-export interface EdgeI {
+export interface InitialEdgeI {
   id: string;
   source: string;
   target: string;
@@ -48,7 +48,19 @@ export interface EdgeI {
   arrow?: boolean;
   style?: JSX.PathSVGAttributes<SVGPathElement>;
   labelStyle?: JSX.CSSProperties;
-  labelBgStyle?: JSX.CSSProperties;
+}
+
+export interface EdgeI {
+  id: string;
+  source: string;
+  target: string;
+  label: string;
+  type: string;
+  animated: boolean;
+  arrow: boolean;
+  selected: boolean;
+  style: JSX.PathSVGAttributes<SVGPathElement>;
+  labelStyle: JSX.CSSProperties;
 }
 
 export interface StoreProps {
@@ -71,6 +83,17 @@ export interface EdgeProps extends EdgeI {
   path: string;
   sourceNode: NodeI;
   targetNode: NodeI;
+}
+
+export interface Nodes {
+  [key: string]: NodeI;
+}
+export interface Edges {
+  [key: string]: EdgeI;
+}
+export interface Store {
+  nodes: Nodes;
+  edges: Edges;
 }
 
 export type HandleType = "source" | "target";

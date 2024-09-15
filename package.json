@@ -1,9 +1,10 @@
 {
   "name": "odysea",
-  "version": "0.4.0",
-  "description": "A fast and lightweight SolidJS component library for building interactive node-based diagrams",
+  "version": "0.5.0",
+  "type": "module",
+  "description": "A fast and lightweight SolidJS component library for building node-based diagrams and graphs.",
   "repository": {
-    "url": "https://github.com/AlidotSal/odysea.git",
+    "url": "git+https://github.com/AlidotSal/odysea.git",
     "type": "git"
   },
   "homepage": "https://github.com/AlidotSal/odysea",
@@ -23,26 +24,27 @@
     "dist"
   ],
   "scripts": {
-    "format": "rome format src/ --write",
-    "lint": "rome check src/ --apply",
+    "format": "npx @biomejs/biome format --write ./src",
+    "lint": "npx @biomejs/biome lint --write ./src",
     "build": "vite build",
     "serve": "vite preview"
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^18.0.9",
-    "rome": "^10.0.1",
-    "typescript": "^4.9.3",
-    "vite": "^3.2.4",
-    "vite-plugin-dts": "^1.3.0",
-    "vite-plugin-solid": "^2.4.0",
-    "vite-plugin-solid-styled": "^0.7.3"
+    "@types/node": "^22.5.5",
+    "vite-plugin-dts": "^4.2.1",
+    "@biomejs/biome": "^1.9.0",
+    "postcss": "^8.4.45",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.4",
+    "vite-plugin-solid": "^2.10.2",
+    "vite-plugin-solid-styled": "^0.11.1"
   },
   "dependencies": {
-    "solid-js": "^1.6.2",
-    "solid-styled": "^0.7.3"
+    "solid-js": "^1.8.22",
+    "solid-styled": "^0.11.1"
   },
   "peerDependencies": {
-    "solid-js": "^1.6.2"
+    "solid-js": "^1.8.22"
   }
 }

@@ -1,28 +1,21 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { defineConfig } from "vite";
-import solidPlugin from "vite-plugin-solid";
-import solidStyled from 'vite-plugin-solid-styled';
+import solid from "vite-plugin-solid";
+import solidStyled from "vite-plugin-solid-styled";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [
-    solidPlugin({
-      babel: {
-        plugins: ["solid-styled/babel"],
-      },
-    }),
+    solid(),
     solidStyled({
-      prefix: 'od',
+      prefix: 'od', // optional
       filter: {
-        include: 'src/**/*.ts',
-        exclude: 'node_modules/**/*.{ts,js}',
+        include: 'src/**/*.{ts,js,tsx,jsx}',
+        exclude: 'node_modules/**/*.{ts,js,tsx,jsx}',
       },
     }),
     dts({
       insertTypesEntry: true,
-      noEmitOnError: true,
-      skipDiagnostics: false,
-      logDiagnostics: true,
     }),
   ],
   build: {

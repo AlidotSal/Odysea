@@ -1,22 +1,20 @@
 import { createMemo } from "solid-js";
+import type { EdgeI, NodeI } from "../../types";
 import BaseEdge from "./BaseEdge";
-import { Position } from "../../types/utils";
-import type { EdgeI } from "../../types";
-import { useStore } from "../../store";
 
 // how to create a smooth, controlled beizer edge from source and target positions
 // referenced from ReactFlow.dev
 interface GetSimpleBezierPathParams {
   sourceX: number;
   sourceY: number;
-  sourcePosition?: Position;
+  sourcePosition?: "top" | "bottom" | "right" | "left";
   targetX: number;
   targetY: number;
-  targetPosition?: Position;
+  targetPosition?: "top" | "bottom" | "right" | "left";
 }
 
 interface GetControlParams {
-  pos?: Position;
+  pos?: "top" | "bottom" | "right" | "left";
   x1: number;
   y1: number;
   x2: number;
@@ -24,17 +22,17 @@ interface GetControlParams {
 }
 
 function getControl({ pos, x1, y1, x2, y2 }: GetControlParams): [number?, number?] {
-  let ctX;
-  let ctY;
+  let ctX: number | undefined = undefined;
+  let ctY: number | undefined = undefined;
   switch (pos) {
-    case Position.Left:
-    case Position.Right: {
+    case "left":
+    case "right": {
       ctX = 0.5 * (x1 + x2);
       ctY = y1;
       break;
     }
-    case Position.Top:
-    case Position.Bottom: {
+    case "top":
+    case "bottom": {
       ctX = x1;
       ctY = 0.5 * (y1 + y2);
       break;
@@ -70,17 +68,18 @@ function getSimpleBezierPath({
 
 interface BezierProps {
   edge: EdgeI;
+  source: NodeI;
+  target: NodeI;
 }
 
 export default function BezierEdge(props: BezierProps) {
-  const { store } = useStore();
   const params = createMemo(() => {
-    const sourceX = store.nodes[props.edge.source]?.output.x;
-    const sourceY = store.nodes[props.edge.source]?.output.y;
-    const sourcePosition = store.nodes[props.edge.source]?.outputPosition;
-    const targetX = store.nodes[props.edge.target]?.input.x;
-    const targetY = store.nodes[props.edge.target]?.input.y;
-    const targetPosition = store.nodes[props.edge.target]?.inputPosition;
+    const sourceX = props.source.output.x;
+    const sourceY = props.source.output.y;
+    const sourcePosition = props.source.outputPosition;
+    const targetX = props.target.input.x;
+    const targetY = props.target.input.y;
+    const targetPosition = props.target.inputPosition;
     return {
       sourceX,
       sourceY,
@@ -94,8 +93,8 @@ export default function BezierEdge(props: BezierProps) {
   const baseEdgeProps = createMemo(() => ({
     ...props.edge,
     path: path(),
-    sourceNode: store.nodes[props.edge.source],
-    targetNode: store.nodes[props.edge.target],
+    sourceNode: props.source,
+    targetNode: props.target,
   }));
 
   return <BaseEdge baseEdgeProps={baseEdgeProps()} />;

@@ -1,8 +1,8 @@
-import { Switch, Match } from "solid-js";
-import Default from "./Default";
-import StickyNote from "./StickyNote";
+import { Match, Switch } from "solid-js";
 import BackDrop from "./BackDrop";
+import Default from "./Default";
 import Dot from "./Dot";
+import StickyNote from "./StickyNote";
 
 import type { NodeI } from "../../types";
 

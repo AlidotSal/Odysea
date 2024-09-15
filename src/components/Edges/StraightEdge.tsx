@@ -1,29 +1,28 @@
 import { createMemo } from "solid-js";
-import { useStore } from "../../store";
+import type { EdgeI, NodeI } from "../../types";
 import BaseEdge from "./BaseEdge";
-import type { EdgeI } from "../../types";
 
 interface StraightEdgeProps {
   edge: EdgeI;
+  source: NodeI;
+  target: NodeI;
 }
 
 export default function StraightEdge(props: StraightEdgeProps) {
-  const { store } = useStore();
   const params = createMemo(() => ({
-    sourceX: store.nodes[props.edge.source].output.x,
-    sourceY: store.nodes[props.edge.source].output.y,
-    sourcePosition: store.nodes[props.edge.source].outputPosition,
-    targetX: store.nodes[props.edge.target].input.x,
-    targetY: store.nodes[props.edge.target].input.y,
-    targetPosition: store.nodes[props.edge.target].inputPosition,
+    sourceX: props.source.output.x,
+    sourceY: props.source.output.y,
+    sourcePosition: props.source.outputPosition,
+    targetX: props.target.input.x,
+    targetY: props.target.input.y,
+    targetPosition: props.target.inputPosition,
   }));
-  const path = () =>
-    `M ${params().sourceX},${params().sourceY}L ${params().targetX},${params().targetY}`;
+  const path = () => `M ${params().sourceX},${params().sourceY}L ${params().targetX},${params().targetY}`;
   const baseEdgeProps = createMemo(() => ({
     ...props.edge,
     path: path(),
-    sourceNode: store.nodes[props.edge.source],
-    targetNode: store.nodes[props.edge.target],
+    sourceNode: props.source,
+    targetNode: props.target,
   }));
   return <BaseEdge baseEdgeProps={baseEdgeProps()} />;
 }

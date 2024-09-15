@@ -1,24 +1,24 @@
-import { Position } from "../../types/utils";
+import type { Nodes } from "../../types";
 export interface GetCenterParams {
   sourceX: number;
   sourceY: number;
   targetX: number;
   targetY: number;
-  sourcePosition?: Position;
-  targetPosition?: Position;
+  sourcePosition?: "top" | "bottom" | "right" | "left";
+  targetPosition?: "top" | "bottom" | "right" | "left";
 }
 
 const LeftOrRight = ["left", "right"];
 
-export const getParams = (store: any, source: number, target: number) => {
-  const sourceNode = store.nodes[source];
-  const targetNode = store.nodes[target];
-  const sLeft = sourceNode.position.x;
-  const sTop = sourceNode.position.y;
+export const getParams = (nodes: Nodes, source: number, target: number) => {
+  const sourceNode = nodes[source];
+  const targetNode = nodes[target];
+  const sLeft = sourceNode.position[0];
+  const sTop = sourceNode.position[1];
   const sWidthHalf = sourceNode.width / 2;
   const sHeightHalf = sourceNode.height;
-  const tLeft = targetNode.position.x;
-  const tTop = targetNode.position.y;
+  const tLeft = targetNode.position[0];
+  const tTop = targetNode.position[1];
   const tWidthHalf = targetNode.width / 2;
   const sourceX: number = sLeft + sWidthHalf;
   const sourceY: number = sTop + sHeightHalf;
@@ -28,10 +28,10 @@ export const getParams = (store: any, source: number, target: number) => {
   return {
     sourceX,
     sourceY,
-    sourcePosition: Position.Top,
+    sourcePosition: "top",
     targetX,
     targetY,
-    targetPosition: Position.Bottom,
+    targetPosition: "bottom",
   };
 };
 
@@ -40,16 +40,15 @@ export const getCenter = ({
   sourceY,
   targetX,
   targetY,
-  sourcePosition = Position.Bottom,
-  targetPosition = Position.Top,
+  sourcePosition = "bottom",
+  targetPosition = "top",
 }: GetCenterParams): [number, number, number, number] => {
   const sourceIsLeftOrRight = LeftOrRight.includes(sourcePosition);
   const targetIsLeftOrRight = LeftOrRight.includes(targetPosition);
 
   // we expect flows to be horizontal or vertical (all handles left or right respectively top or bottom)
   // a mixed edge is when one the source is on the left and the target is on the top for example.
-  const mixedEdge =
-    (sourceIsLeftOrRight && !targetIsLeftOrRight) || (targetIsLeftOrRight && !sourceIsLeftOrRight);
+  const mixedEdge = (sourceIsLeftOrRight && !targetIsLeftOrRight) || (targetIsLeftOrRight && !sourceIsLeftOrRight);
 
   if (mixedEdge) {
     const xOffset = sourceIsLeftOrRight ? Math.abs(targetX - sourceX) : 0;

@@ -36,18 +36,21 @@ npm install odysea # or yarn add
 import Flow from "odysea";
 
 function Flow(props) {
-  return <Flow nodes={props.nodes} edges={props.edges}></Flow>;
+  return <Flow nodes={props.nodes} edges={props.edges} />;
 }
 ```
 
 ## Flow Component's Props
 
-| Name   | Type   | default | Description             |
-| ------ | ------ | ------- | ----------------------- |
-| nodes  | Node[] | []      | array of nodes          |
-| edges  | Edge[] | []      | array of edges          |
-| width  | string | "800px" | width of the container  |
-| height | string | "800px" | height of the container |
+| Name       | Type   | default | Description                       |
+| ---------- | ------ | ------- | --------------------------------- |
+| nodes      | Node[] | []      | array of nodes                    |
+| edges      | Edge[] | []      | array of edges                    |
+| width      | string | "auto"  | width of the container            |
+| height     | string | "auto"  | height of the container           |
+| transition | string | [0, 0]  | view coordinates                  |
+| scale      | string | 1       | scale of the container            |
+| bg         | string | none    | background color of the container |
 
 ```jsx
 type Node = {
@@ -84,27 +87,6 @@ type Edge = {
 ## Live Demo
 
 [Live Example On stackblitz](https://stackblitz.com/edit/vitejs-vite-3ardiv?file=src%2FApp.tsx)
-
-- Pan: alt + drag
-- Zoom: mouse wheel
-
-## More Fine Grained API
-
-There is also other components if you need more control on your flow
-
-```jsx
-import Flow from "odysea";
-import { Node, Edge } from "odysea";
-
-function Flow(props) {
-  return (
-    <Flow nodes={props.nodes} edges={props.edges}>
-      <Node data={...} />
-      <Edge data={...} />
-    </Flow>
-  );
-}
-```
 
 ## Development
 
