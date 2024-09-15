@@ -1,6 +1,6 @@
 {
   "name": "odysea",
-  "version": "0.5.0",
+  "version": "0.5.4",
   "type": "module",
   "description": "A fast and lightweight SolidJS component library for building node-based diagrams and graphs.",
   "repository": {
@@ -8,12 +8,12 @@
     "type": "git"
   },
   "homepage": "https://github.com/AlidotSal/odysea",
-  "main": "dist/odysea.umd.js",
-  "module": "dist/odysea.mjs",
+  "main": "dist/odysea.cjs",
+  "module": "dist/odysea.js",
   "exports": {
     ".": {
-      "import": "./dist/odysea.mjs",
-      "require": "./dist/odysea.umd.js"
+      "import": "./dist/odysea.js",
+      "require": "./dist/odysea.cjs"
     },
     "./package.json": "./package.json",
     "./dist/style.css": "./dist/style.css"

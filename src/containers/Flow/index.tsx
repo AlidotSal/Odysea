@@ -3,8 +3,8 @@ import { StyleRegistry } from "solid-styled";
 import { css } from "solid-styled";
 import Edge from "../../components/Edges";
 import Node from "../../components/Nodes";
-import "./styles.css";
 import type { EdgeI, NodeI } from "../../types";
+import "./styles.css";
 
 interface Props {
   nodes: NodeI[];
