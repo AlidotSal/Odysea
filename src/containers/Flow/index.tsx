@@ -24,17 +24,17 @@ export default (props: Props) => {
     background-color: ${props.bg || "var(--canvasBG)"};
   }
   .nodes {
-    transition: ${props.transition ? props.transition[0].toString() : "0"}px ${props.transition ? props.transition[1].toString() : "0"}px;
+    transition: ${props.transition ? `${props.transition[0]}px` : "0"} ${props.transition ? `${props.transition[1]}px` : "0"};
     scale: ${props.scale?.toString() || "1"}
   }
   #rects:first-child {
-    transition: ${props.transition ? props.transition[0].toString() : "0"}px ${props.transition ? props.transition[1].toString() : "0"}px;
+    transition: ${props.transition ? `${props.transition[0]}px` : "0"} ${props.transition ? `${props.transition[1]}px` : "0"};
     scale: ${props.scale?.toString() || "1"}
   }
   .edges {
     width: ${props.width};
     height: ${props.height};
-    transition: ${props.transition ? props.transition[0].toString() : "0"}px ${props.transition ? props.transition[1].toString() : "0"}px;
+    transition: ${props.transition ? `${props.transition[0]}px` : "0"} ${props.transition ? `${props.transition[1]}px` : "0"};
     scale: ${props.scale?.toString() || "1"}
   }
 `;

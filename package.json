@@ -1,6 +1,6 @@
 {
   "name": "odysea",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "type": "module",
   "description": "A fast and lightweight SolidJS component library for building node-based diagrams and graphs.",
   "repository": {
